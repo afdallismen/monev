@@ -26,8 +26,8 @@ class BaseAccountAdmin(admin.ModelAdmin):
     def name(self, acc):
         name = False
         if acc.user.first_name or acc.user.last_name:
-            name = (str(acc.user.first_name), str(acc.user.last_name))
-            name = ((word.lower()).capitalize() for word in name)
+            name = (acc.user.first_name, acc.user.last_name)
+            name = ((str(word).lower()).capitalize() for word in name)
             name = " ".join(name)
         return name if name else "-username: {}-".format(acc.user.username)
     name.admin_order_field = 'user__first_name'

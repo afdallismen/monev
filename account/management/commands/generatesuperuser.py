@@ -15,6 +15,7 @@ class Command(BaseCommand):
             is_superuser=True,
         )
         admin.set_password("admin")
+        admin.is_staff = True
         admin.save()
 
         self.stdout.write(

@@ -1,7 +1,7 @@
 import os
 import csv
 
-from main.settings import BASE_DIR
+from root.settings import BASE_DIR
 
 
 def read_csv(file, fieldnames):
@@ -15,6 +15,6 @@ def read_csv(file, fieldnames):
 
 
 PROVINCES = read_csv("provinces.csv", fieldnames=['id', 'name'])
-# REGENCIES = read_csv("regencies.csv", fieldnames=['id', 'ign', 'name'])
+REGENCIES = read_csv("regencies.csv", fieldnames=['id', 'ign', 'name'])
 # DISTRICTS = read_csv("districts.csv", fieldnames=['id', 'ign', 'name'])
 # VILLAGES = read_csv("villages.csv", fieldnames=['id', 'ign', 'name'])
