@@ -1,25 +1,26 @@
-from django.core import validators
 from django.db import models
-from django.utils import timezone
 
-from region.utils import PROVINCES, REGENCIES
+
+class Province(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.name)
+
+
+class Regency(models.Model):
+    province = models.ForeignKey(Province, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.name)
 
 
 class Diklat(models.Model):
-    PROVINCE_CHOICES = [[row['id'], row['name']] for row in PROVINCES]
-    REGENCY_CHOCIES = [[row['id'], row['name']] for row in REGENCIES]
-
     title = models.CharField(max_length=200)
-    province = models.CharField(max_length=2, choices=PROVINCE_CHOICES)
-    regency = models.CharField(max_length=4, choices=REGENCY_CHOCIES)
-    date = models.DateTimeField(
-        validators=[
-            validators.MinValueValidator(
-                timezone.now(),
-                "Date can't be in the past."
-            ),
-        ]
-    )
+    province = models.ForeignKey(Province, on_delete=models.CASCADE)
+    regency = models.ManyToManyField(Regency)
+    date = models.DateTimeField()
     location = models.CharField(max_length=200)
     duration = models.PositiveSmallIntegerField()
     supervisor = models.CharField(max_length=200)

@@ -6,11 +6,11 @@ from root.settings import BASE_DIR
 
 def read_csv(file, fieldnames):
     # return ordered dict
-    data = []
+    data = {}
     with open(os.path.join(BASE_DIR, "region", file), newline="") as csvfile:
         reader = csv.DictReader(csvfile, fieldnames=fieldnames)
         for row in reader:
-            data.append(row)
+            data[row['id']] = row['name']
     return data
 
 

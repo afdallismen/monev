@@ -1,12 +1,10 @@
+# TODO:
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import (
     ObjectDoesNotExist, MultipleObjectsReturned, ValidationError
 )
 from django.db import models
-
-
-from region.utils import PROVINCES
 
 
 class User(AbstractUser):
@@ -33,28 +31,24 @@ class User(AbstractUser):
                 and self.participant is not None)
 
 
-class RegionalAdmin(models.Model):
-    PROVINCE_CHOICES = [[row['id'], row['name']] for row in PROVINCES]
-
+class BaseAccount(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
-    region = models.CharField(
-        max_length=2,
-        choices=PROVINCE_CHOICES,
-        unique=True,
-    )
+
+    class Meta:
+        abstract = True
 
     def __str__(self):
         return str(self.user)
 
-    @property
-    def _has_user(self):
-        return hasattr(self, 'user') and self.user is not None
+
+class RegionalAdmin(BaseAccount):
+    region = models.ForeignKey('main.Province', on_delete=models.CASCADE)
 
     def clean(self):
-        if self._has_user and self.user.is_participant:
+        if self.user.id and self.user.is_participant:
             raise ValidationError({
                 'user': "User already registered as a Participant."
             })
@@ -64,21 +58,9 @@ class RegionalAdmin(models.Model):
         verbose_name_plural = "regional admins"
 
 
-class Participant(models.Model):
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-    )
-
-    def __str__(self):
-        return str(self.user)
-
-    @property
-    def _has_user(self):
-        return hasattr(self, 'user') and self.user is not None
-
+class Participant(BaseAccount):
     def clean(self):
-        if self._has_user and self.user.is_regionaladmin:
+        if self.user.id and self.user.is_regionaladmin:
             raise ValidationError({
                 'user': "User already registered as a RegionalAdmin."
             })

@@ -10,7 +10,7 @@ class Command(BaseCommand):
             "with username and password as 'admin'.")
 
     def handle(self, *args, **options):
-        admin, created = User.objects.get_or_create(
+        admin, ign = User.objects.get_or_create(
             username="admin",
             is_superuser=True,
         )

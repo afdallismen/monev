@@ -25,7 +25,12 @@ SECRET_KEY = 'md5^1e7_f(f@_k&)3adb3!%(03ldr164-tns+xtl+i&d03&==y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'afdallismen.pythonanywhere.com',
+    'localhost',
+    '127.0.0.1',
+    '[::1]',
+]
 
 
 # Application definition
@@ -39,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account.apps.AccountConfig',
     'main.apps.MainConfig',
+    'easy_select2',
 ]
 
 MIDDLEWARE = [

@@ -32,6 +32,9 @@ class ParticipantCreationForm(forms.ModelForm):
         strip=False,
         help_text="Enter the same password as before, for verification.",
     )
+    first_name = FirstNameField
+    last_name = LastNameField
+    is_active = IsActiveField
 
     class Meta:
         model = Participant
@@ -62,6 +65,8 @@ class ParticipantCreationForm(forms.ModelForm):
         user = User(
             username=self.cleaned_data['username'],
             is_active=True,
+            first_name=self.cleaned_data['first_name'],
+            last_name=self.cleaned_data['last_name'],
         )
         user.set_password(self.cleaned_data['password1'])
         user.save()
@@ -95,9 +100,16 @@ class ParticipantChangeForm(forms.ModelForm):
         user = self.instance.user
         self.fields['username'].initial = user.username
         self.fields['password'].initial = user.password
+        self.fields['password'].help_text = self.fields['password'].help_text.format("../password/")  # noqa
         self.fields['first_name'].initial = user.first_name
         self.fields['last_name'].initial = user.last_name
         self.fields['is_active'].initial = user.is_active
+
+    def clean_password(self):
+        # Regardless of what the user provides, return the initial value.
+        # This is done here, rather than on the field, because the
+        # field does not have access to the initial value
+        return self.initial["password"]
 
     def save(self, commit=True):
         participant = super().save(commit=False)
@@ -129,6 +141,9 @@ class RegionalAdminCreationForm(forms.ModelForm):
         strip=False,
         help_text="Enter the same password as before, for verification.",
     )
+    first_name = FirstNameField
+    last_name = LastNameField
+    is_active = IsActiveField
 
     class Meta:
         model = RegionalAdmin
@@ -160,6 +175,8 @@ class RegionalAdminCreationForm(forms.ModelForm):
             username=self.cleaned_data['username'],
             is_active=True,
             is_staff=True,
+            first_name=self.cleaned_data['first_name'],
+            last_name=self.cleaned_data['last_name'],
         )
         user.set_password(self.cleaned_data['password1'])
         user.save()
