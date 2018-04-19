@@ -10,18 +10,19 @@ DiklatForm = select2_modelform(Diklat, attrs={'width': '300px'})
 
 class DiklatAdmin(admin.ModelAdmin):
     form = DiklatForm
+    list_display = ('title', 'province')
 
 
 class QuestionnaireAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('diklat', 'instrument')
 
 
 class TopicAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('questionnaire', 'title')
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('topic', 'text')
 
 
 admin.site.register(Diklat, DiklatAdmin)
