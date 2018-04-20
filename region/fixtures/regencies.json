@@ -1,0 +1,1079 @@
+[{
+  "model": "region.regency",
+  "pk": 1,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN SIMEULUE"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 2,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN ACEH SINGKIL"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 3,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN ACEH SELATAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 4,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN ACEH TENGGARA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 5,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN ACEH TIMUR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 6,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN ACEH TENGAH"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 7,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN ACEH BARAT"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 8,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN ACEH BESAR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 9,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN PIDIE"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 10,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN BIREUEN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 11,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN ACEH UTARA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 12,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN ACEH BARAT DAYA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 13,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN GAYO LUES"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 14,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN ACEH TAMIANG"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 15,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN NAGAN RAYA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 16,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN ACEH JAYA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 17,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN BENER MERIAH"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 18,
+  "fields": {
+    "province": 1,
+    "name": "KABUPATEN PIDIE JAYA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 19,
+  "fields": {
+    "province": 1,
+    "name": "KOTA BANDA ACEH"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 20,
+  "fields": {
+    "province": 1,
+    "name": "KOTA SABANG"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 21,
+  "fields": {
+    "province": 1,
+    "name": "KOTA LANGSA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 22,
+  "fields": {
+    "province": 1,
+    "name": "KOTA LHOKSEUMAWE"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 23,
+  "fields": {
+    "province": 1,
+    "name": "KOTA SUBULUSSALAM"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 24,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN NIAS"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 25,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN MANDAILING NATAL"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 26,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN TAPANULI SELATAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 27,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN TAPANULI TENGAH"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 28,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN TAPANULI UTARA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 29,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN TOBA SAMOSIR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 30,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN LABUHAN BATU"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 31,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN ASAHAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 32,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN SIMALUNGUN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 33,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN DAIRI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 34,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN KARO"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 35,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN DELI SERDANG"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 36,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN LANGKAT"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 37,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN NIAS SELATAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 38,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN HUMBANG HASUNDUTAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 39,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN PAKPAK BHARAT"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 40,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN SAMOSIR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 41,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN SERDANG BEDAGAI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 42,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN BATU BARA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 43,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN PADANG LAWAS UTARA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 44,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN PADANG LAWAS"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 45,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN LABUHAN BATU SELATAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 46,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN LABUHAN BATU UTARA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 47,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN NIAS UTARA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 48,
+  "fields": {
+    "province": 2,
+    "name": "KABUPATEN NIAS BARAT"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 49,
+  "fields": {
+    "province": 2,
+    "name": "KOTA SIBOLGA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 50,
+  "fields": {
+    "province": 2,
+    "name": "KOTA TANJUNG BALAI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 51,
+  "fields": {
+    "province": 2,
+    "name": "KOTA PEMATANG SIANTAR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 52,
+  "fields": {
+    "province": 2,
+    "name": "KOTA TEBING TINGGI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 53,
+  "fields": {
+    "province": 2,
+    "name": "KOTA MEDAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 54,
+  "fields": {
+    "province": 2,
+    "name": "KOTA BINJAI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 55,
+  "fields": {
+    "province": 2,
+    "name": "KOTA PADANGSIDIMPUAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 56,
+  "fields": {
+    "province": 2,
+    "name": "KOTA GUNUNGSITOLI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 57,
+  "fields": {
+    "province": 3,
+    "name": "KABUPATEN KEPULAUAN MENTAWAI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 58,
+  "fields": {
+    "province": 3,
+    "name": "KABUPATEN PESISIR SELATAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 59,
+  "fields": {
+    "province": 3,
+    "name": "KABUPATEN SOLOK"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 60,
+  "fields": {
+    "province": 3,
+    "name": "KABUPATEN SIJUNJUNG"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 61,
+  "fields": {
+    "province": 3,
+    "name": "KABUPATEN TANAH DATAR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 62,
+  "fields": {
+    "province": 3,
+    "name": "KABUPATEN PADANG PARIAMAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 63,
+  "fields": {
+    "province": 3,
+    "name": "KABUPATEN AGAM"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 64,
+  "fields": {
+    "province": 3,
+    "name": "KABUPATEN LIMA PULUH KOTA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 65,
+  "fields": {
+    "province": 3,
+    "name": "KABUPATEN PASAMAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 66,
+  "fields": {
+    "province": 3,
+    "name": "KABUPATEN SOLOK SELATAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 67,
+  "fields": {
+    "province": 3,
+    "name": "KABUPATEN DHARMASRAYA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 68,
+  "fields": {
+    "province": 3,
+    "name": "KABUPATEN PASAMAN BARAT"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 69,
+  "fields": {
+    "province": 3,
+    "name": "KOTA PADANG"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 70,
+  "fields": {
+    "province": 3,
+    "name": "KOTA SOLOK"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 71,
+  "fields": {
+    "province": 3,
+    "name": "KOTA SAWAH LUNTO"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 72,
+  "fields": {
+    "province": 3,
+    "name": "KOTA PADANG PANJANG"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 73,
+  "fields": {
+    "province": 3,
+    "name": "KOTA BUKITTINGGI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 74,
+  "fields": {
+    "province": 3,
+    "name": "KOTA PAYAKUMBUH"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 75,
+  "fields": {
+    "province": 3,
+    "name": "KOTA PARIAMAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 76,
+  "fields": {
+    "province": 4,
+    "name": "KABUPATEN KUANTAN SINGINGI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 77,
+  "fields": {
+    "province": 4,
+    "name": "KABUPATEN INDRAGIRI HULU"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 78,
+  "fields": {
+    "province": 4,
+    "name": "KABUPATEN INDRAGIRI HILIR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 79,
+  "fields": {
+    "province": 4,
+    "name": "KABUPATEN PELALAWAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 80,
+  "fields": {
+    "province": 4,
+    "name": "KABUPATEN SIAK"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 81,
+  "fields": {
+    "province": 4,
+    "name": "KABUPATEN KAMPAR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 82,
+  "fields": {
+    "province": 4,
+    "name": "KABUPATEN ROKAN HULU"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 83,
+  "fields": {
+    "province": 4,
+    "name": "KABUPATEN BENGKALIS"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 84,
+  "fields": {
+    "province": 4,
+    "name": "KABUPATEN ROKAN HILIR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 85,
+  "fields": {
+    "province": 4,
+    "name": "KABUPATEN KEPULAUAN MERANTI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 86,
+  "fields": {
+    "province": 4,
+    "name": "KOTA PEKANBARU"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 87,
+  "fields": {
+    "province": 4,
+    "name": "KOTA DUMAI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 88,
+  "fields": {
+    "province": 5,
+    "name": "KABUPATEN KERINCI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 89,
+  "fields": {
+    "province": 5,
+    "name": "KABUPATEN MERANGIN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 90,
+  "fields": {
+    "province": 5,
+    "name": "KABUPATEN SAROLANGUN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 91,
+  "fields": {
+    "province": 5,
+    "name": "KABUPATEN BATANG HARI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 92,
+  "fields": {
+    "province": 5,
+    "name": "KABUPATEN MUARO JAMBI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 93,
+  "fields": {
+    "province": 5,
+    "name": "KABUPATEN TANJUNG JABUNG TIMUR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 94,
+  "fields": {
+    "province": 5,
+    "name": "KABUPATEN TANJUNG JABUNG BARAT"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 95,
+  "fields": {
+    "province": 5,
+    "name": "KABUPATEN TEBO"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 96,
+  "fields": {
+    "province": 5,
+    "name": "KABUPATEN BUNGO"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 97,
+  "fields": {
+    "province": 5,
+    "name": "KOTA JAMBI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 98,
+  "fields": {
+    "province": 5,
+    "name": "KOTA SUNGAI PENUH"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 99,
+  "fields": {
+    "province": 6,
+    "name": "KABUPATEN OGAN KOMERING ULU"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 100,
+  "fields": {
+    "province": 6,
+    "name": "KABUPATEN OGAN KOMERING ILIR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 101,
+  "fields": {
+    "province": 6,
+    "name": "KABUPATEN MUARA ENIM"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 102,
+  "fields": {
+    "province": 6,
+    "name": "KABUPATEN LAHAT"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 103,
+  "fields": {
+    "province": 6,
+    "name": "KABUPATEN MUSI RAWAS"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 104,
+  "fields": {
+    "province": 6,
+    "name": "KABUPATEN MUSI BANYUASIN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 105,
+  "fields": {
+    "province": 6,
+    "name": "KABUPATEN BANYU ASIN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 106,
+  "fields": {
+    "province": 6,
+    "name": "KABUPATEN OGAN KOMERING ULU SELATAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 107,
+  "fields": {
+    "province": 6,
+    "name": "KABUPATEN OGAN KOMERING ULU TIMUR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 108,
+  "fields": {
+    "province": 6,
+    "name": "KABUPATEN OGAN ILIR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 109,
+  "fields": {
+    "province": 6,
+    "name": "KABUPATEN EMPAT LAWANG"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 110,
+  "fields": {
+    "province": 6,
+    "name": "KABUPATEN PENUKAL ABAB LEMATANG ILIR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 111,
+  "fields": {
+    "province": 6,
+    "name": "KABUPATEN MUSI RAWAS UTARA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 112,
+  "fields": {
+    "province": 6,
+    "name": "KOTA PALEMBANG"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 113,
+  "fields": {
+    "province": 6,
+    "name": "KOTA PRABUMULIH"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 114,
+  "fields": {
+    "province": 6,
+    "name": "KOTA PAGAR ALAM"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 115,
+  "fields": {
+    "province": 6,
+    "name": "KOTA LUBUKLINGGAU"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 116,
+  "fields": {
+    "province": 7,
+    "name": "KABUPATEN BENGKULU SELATAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 117,
+  "fields": {
+    "province": 7,
+    "name": "KABUPATEN REJANG LEBONG"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 118,
+  "fields": {
+    "province": 7,
+    "name": "KABUPATEN BENGKULU UTARA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 119,
+  "fields": {
+    "province": 7,
+    "name": "KABUPATEN KAUR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 120,
+  "fields": {
+    "province": 7,
+    "name": "KABUPATEN SELUMA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 121,
+  "fields": {
+    "province": 7,
+    "name": "KABUPATEN MUKOMUKO"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 122,
+  "fields": {
+    "province": 7,
+    "name": "KABUPATEN LEBONG"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 123,
+  "fields": {
+    "province": 7,
+    "name": "KABUPATEN KEPAHIANG"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 124,
+  "fields": {
+    "province": 7,
+    "name": "KABUPATEN BENGKULU TENGAH"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 125,
+  "fields": {
+    "province": 7,
+    "name": "KOTA BENGKULU"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 126,
+  "fields": {
+    "province": 8,
+    "name": "KABUPATEN LAMPUNG BARAT"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 127,
+  "fields": {
+    "province": 8,
+    "name": "KABUPATEN TANGGAMUS"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 128,
+  "fields": {
+    "province": 8,
+    "name": "KABUPATEN LAMPUNG SELATAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 129,
+  "fields": {
+    "province": 8,
+    "name": "KABUPATEN LAMPUNG TIMUR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 130,
+  "fields": {
+    "province": 8,
+    "name": "KABUPATEN LAMPUNG TENGAH"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 131,
+  "fields": {
+    "province": 8,
+    "name": "KABUPATEN LAMPUNG UTARA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 132,
+  "fields": {
+    "province": 8,
+    "name": "KABUPATEN WAY KANAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 133,
+  "fields": {
+    "province": 8,
+    "name": "KABUPATEN TULANGBAWANG"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 134,
+  "fields": {
+    "province": 8,
+    "name": "KABUPATEN PESAWARAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 135,
+  "fields": {
+    "province": 8,
+    "name": "KABUPATEN PRINGSEWU"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 136,
+  "fields": {
+    "province": 8,
+    "name": "KABUPATEN MESUJI"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 137,
+  "fields": {
+    "province": 8,
+    "name": "KABUPATEN TULANG BAWANG BARAT"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 138,
+  "fields": {
+    "province": 8,
+    "name": "KABUPATEN PESISIR BARAT"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 139,
+  "fields": {
+    "province": 8,
+    "name": "KOTA BANDAR LAMPUNG"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 140,
+  "fields": {
+    "province": 8,
+    "name": "KOTA METRO"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 141,
+  "fields": {
+    "province": 9,
+    "name": "KABUPATEN BANGKA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 142,
+  "fields": {
+    "province": 9,
+    "name": "KABUPATEN BELITUNG"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 143,
+  "fields": {
+    "province": 9,
+    "name": "KABUPATEN BANGKA BARAT"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 144,
+  "fields": {
+    "province": 9,
+    "name": "KABUPATEN BANGKA TENGAH"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 145,
+  "fields": {
+    "province": 9,
+    "name": "KABUPATEN BANGKA SELATAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 146,
+  "fields": {
+    "province": 9,
+    "name": "KABUPATEN BELITUNG TIMUR"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 147,
+  "fields": {
+    "province": 9,
+    "name": "KOTA PANGKAL PINANG"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 148,
+  "fields": {
+    "province": 10,
+    "name": "KABUPATEN KARIMUN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 149,
+  "fields": {
+    "province": 10,
+    "name": "KABUPATEN BINTAN"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 150,
+  "fields": {
+    "province": 10,
+    "name": "KABUPATEN NATUNA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 151,
+  "fields": {
+    "province": 10,
+    "name": "KABUPATEN LINGGA"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 152,
+  "fields": {
+    "province": 10,
+    "name": "KABUPATEN KEPULAUAN ANAMBAS"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 153,
+  "fields": {
+    "province": 10,
+    "name": "KOTA BATAM"
+  }
+}, {
+  "model": "region.regency",
+  "pk": 154,
+  "fields": {
+    "province": 10,
+    "name": "KOTA TANJUNG PINANG"
+  }
+}]

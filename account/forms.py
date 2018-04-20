@@ -148,6 +148,8 @@ class RegionalAdminCreationForm(forms.ModelForm):
     class Meta:
         model = RegionalAdmin
         exclude = ['user']
+        fields = ['username', 'password1', 'password2', 'first_name',
+                  'last_name', 'region', 'is_active']
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -204,6 +206,8 @@ class RegionalAdminChangeForm(forms.ModelForm):
     class Meta:
         model = RegionalAdmin
         exclude = ['user']
+        fields = ['username', 'password', 'first_name', 'last_name', 'region',
+                  'is_active']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

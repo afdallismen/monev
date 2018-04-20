@@ -1,0 +1,61 @@
+[{
+  "model": "region.province",
+  "pk": 1,
+  "fields": {
+    "name": "ACEH"
+  }
+}, {
+  "model": "region.province",
+  "pk": 2,
+  "fields": {
+    "name": "SUMATERA UTARA"
+  }
+}, {
+  "model": "region.province",
+  "pk": 3,
+  "fields": {
+    "name": "SUMATERA BARAT"
+  }
+}, {
+  "model": "region.province",
+  "pk": 4,
+  "fields": {
+    "name": "RIAU"
+  }
+}, {
+  "model": "region.province",
+  "pk": 5,
+  "fields": {
+    "name": "JAMBI"
+  }
+}, {
+  "model": "region.province",
+  "pk": 6,
+  "fields": {
+    "name": "SUMATERA SELATAN"
+  }
+}, {
+  "model": "region.province",
+  "pk": 7,
+  "fields": {
+    "name": "BENGKULU"
+  }
+}, {
+  "model": "region.province",
+  "pk": 8,
+  "fields": {
+    "name": "LAMPUNG"
+  }
+}, {
+  "model": "region.province",
+  "pk": 9,
+  "fields": {
+    "name": "KEPULAUAN BANGKA BELITUNG"
+  }
+}, {
+  "model": "region.province",
+  "pk": 10,
+  "fields": {
+    "name": "KEPULAUAN RIAU"
+  }
+}]

@@ -32,6 +32,7 @@ class BaseAccountAdmin(admin.ModelAdmin):
     list_display = ('name', 'is_active')
     change_user_password_template = None
     change_password_form = AdminPasswordChangeForm
+    search_fields = ['^user__first_name', '^user__last_name']
 
     # This method is copied from django.contrib.auth.admin
     def get_urls(self):
@@ -142,10 +143,12 @@ class ParticipantAdmin(BaseAccountAdmin):
 class RegionalAdminAdmin(BaseAccountAdmin):
     form = RegionalAdminChangeForm
     add_form = RegionalAdminCreationForm
+    autocomplete_fields = ('region', )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.list_display = self.list_display + ('region', )
+        self.search_fields = self.search_fields + ['region__name']
 
 
 admin.site.register(RegionalAdmin, RegionalAdminAdmin)

@@ -1,6 +1,5 @@
 Django==2.0.4
 django-appconf==1.0.2
-django-easy-select2==1.4.0
 django-nested-admin==3.0.21
 python-monkey-business==1.0.0
 pytz==2018.3

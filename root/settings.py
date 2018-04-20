@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account.apps.AccountConfig',
     'main.apps.MainConfig',
-    'easy_select2',
-    'nested_admin'
+    'region.apps.RegionConfig',
+    'nested_admin',
 ]
 
 MIDDLEWARE = [

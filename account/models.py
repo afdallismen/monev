@@ -6,6 +6,8 @@ from django.core.exceptions import (
 )
 from django.db import models
 
+from region.models import Province
+
 
 class User(AbstractUser):
     def get_account(self):
@@ -45,7 +47,7 @@ class BaseAccount(models.Model):
 
 
 class RegionalAdmin(BaseAccount):
-    region = models.ForeignKey('main.Province', on_delete=models.CASCADE)
+    region = models.ForeignKey(Province, on_delete=models.CASCADE)
 
     def clean(self):
         if hasattr(self, 'user') and self.user.is_participant:
