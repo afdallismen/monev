@@ -145,16 +145,7 @@ class RegionalAdminAdmin(BaseAccountAdmin):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.list_display = self.list_display + ('region_display', )
-
-    def region_display(self, acc):
-        # Convert all caps to title case
-        region = (str(acc.get_region_display()).lower()).split()
-        region = (word.capitalize() for word in region)
-        region = " ".join(region)
-
-        return region
-    region_display.short_description = "region"
+        self.list_display = self.list_display + ('region', )
 
 
 admin.site.register(RegionalAdmin, RegionalAdminAdmin)

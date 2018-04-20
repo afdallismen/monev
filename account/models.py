@@ -48,7 +48,7 @@ class RegionalAdmin(BaseAccount):
     region = models.ForeignKey('main.Province', on_delete=models.CASCADE)
 
     def clean(self):
-        if self.user.id and self.user.is_participant:
+        if hasattr(self, 'user') and self.user.is_participant:
             raise ValidationError({
                 'user': "User already registered as a Participant."
             })
@@ -60,7 +60,7 @@ class RegionalAdmin(BaseAccount):
 
 class Participant(BaseAccount):
     def clean(self):
-        if self.user.id and self.user.is_regionaladmin:
+        if hasattr(self, 'user') and self.user.is_regionaladmin:
             raise ValidationError({
                 'user': "User already registered as a RegionalAdmin."
             })

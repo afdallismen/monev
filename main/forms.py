@@ -1,12 +1,12 @@
 from django import forms
 
-from main.models import Diklat
+from main.models import Question
 
 
-class DiklatForm(forms.ModelForm):
+class QuestionForm(forms.ModelForm):
     class Meta:
-        model = Diklat
+        model = Question
         fields = '__all__'
         widgets = {
-            'regency': forms.CheckboxSelectMultiple()
+            'text': forms.Textarea(attrs={'rows': 1})
         }

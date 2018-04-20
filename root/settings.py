@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'main.apps.MainConfig',
     'easy_select2',
+    'nested_admin'
 ]
 
 MIDDLEWARE = [

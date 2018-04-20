@@ -31,28 +31,29 @@ class Diklat(models.Model):
         verbose_name_plural = "diklat"
 
     def __str__(self):
-        return str(self.title).capitalize()
+        return str(self.title).title()
 
 
 class Questionnaire(models.Model):
     INSTRUMENT_CHOICES = (
-        ('0', "instrument A"),
-        ('1', "instrument B"),
-        ('2', "instrument C"),
+        ('0', "Instrument A"),
+        ('1', "Instrument B"),
+        ('2', "Instrument C"),
     )
 
     diklat = models.ForeignKey(Diklat, on_delete=models.CASCADE)
     instrument = models.CharField(max_length=2, choices=INSTRUMENT_CHOICES)
 
     class Meta:
+        unique_together = ('diklat', 'instrument')
         verbose_name = "questionnaire"
         verbose_name_plural = "questionnaires"
 
-    def __repr__(self):
-        return "Questionnaire(instrument={}, diklat={})".format((
+    def __str__(self):
+        return "Questionnaire {} from {}".format(
             self.get_instrument_display(),
             self.diklat
-        ))
+        )
 
 
 class Topic(models.Model):
@@ -64,7 +65,7 @@ class Topic(models.Model):
         verbose_name_plural = "Topics"
 
     def __str__(self):
-        return str(self.title).capitalize()
+        return str(self.title).title()
 
 
 class Question(models.Model):
@@ -74,3 +75,6 @@ class Question(models.Model):
     class Meta:
         verbose_name = "Question"
         verbose_name_plural = "Questions"
+
+    def __str__(self):
+        return str(self.text).capitalize()
