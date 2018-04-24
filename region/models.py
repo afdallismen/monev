@@ -6,7 +6,7 @@ class Province(models.Model):
 
     class Meta:
         verbose_name = "province"
-        verbose_name_plural = "provincies"
+        verbose_name_plural = "provinces"
 
     def __str__(self):
         return str(self.name)

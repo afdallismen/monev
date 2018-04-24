@@ -3,7 +3,10 @@ import nested_admin
 from django.contrib import admin
 
 from main.forms import QuestionForm
-from main.models import Diklat, Questionnaire, Topic, Question
+from main.models import (
+    Diklat, Questionnaire, Topic, Question, Parameter, Aspect, Response,
+    Recommendation
+)
 
 
 class DiklatAdmin(admin.ModelAdmin):
@@ -32,22 +35,20 @@ class TopicInline(nested_admin.NestedStackedInline):
 
 
 class QuestionnaireAdmin(nested_admin.NestedModelAdmin):
-    list_display = ('__str__', 'diklat', 'instrument')
-    list_filter = ('diklat', )
-    inlines = [TopicInline]
+    # list_display = ('__str__', 'diklat', 'instrument')
+    # list_filter = ('diklat', )
+    # inlines = [TopicInline]
+    pass
 
 
-class TopicAdmin(admin.ModelAdmin):
-    list_display = ('questionnaire', 'title')
-    list_filter = ('questionnaire', )
+class BasicAdmin(admin.ModelAdmin):
+    pass
 
 
-class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('topic', 'text')
-    list_filter = ('topic', )
-
+testModels = [Questionnaire, Topic, Question, Parameter, Aspect, Response,
+              Recommendation]
 
 admin.site.register(Diklat, DiklatAdmin)
-admin.site.register(Questionnaire, QuestionnaireAdmin)
-admin.site.register(Topic, TopicAdmin)
-admin.site.register(Question, QuestionAdmin)
+
+for model in testModels:
+    admin.site.register(model, BasicAdmin)

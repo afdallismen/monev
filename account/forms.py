@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model, password_validation
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from account.models import Participant, RegionalAdmin
+from account.models import Respondent, RegionalAdmin
 
 
 User = get_user_model()
@@ -15,7 +15,7 @@ LastNameField = user_fields['last_name']
 IsActiveField = user_fields['is_active']
 
 
-class ParticipantCreationForm(forms.ModelForm):
+class RespondentCreationForm(forms.ModelForm):
     error_messages = {
         'password_mismatch': "The two password fields didn't match.",
     }
@@ -37,7 +37,7 @@ class ParticipantCreationForm(forms.ModelForm):
     is_active = IsActiveField
 
     class Meta:
-        model = Participant
+        model = Respondent
         exclude = ['user']
 
     def clean_password2(self):
@@ -70,14 +70,14 @@ class ParticipantCreationForm(forms.ModelForm):
         )
         user.set_password(self.cleaned_data['password1'])
         user.save()
-        participant = super().save(commit=False)
-        participant.user = user
+        respondent = super().save(commit=False)
+        respondent.user = user
         if commit:
-            participant.save()
-        return participant
+            respondent.save()
+        return respondent
 
 
-class ParticipantChangeForm(forms.ModelForm):
+class RespondentChangeForm(forms.ModelForm):
     username = UsernameField
     password = ReadOnlyPasswordHashField(
         label="Password",
@@ -92,7 +92,7 @@ class ParticipantChangeForm(forms.ModelForm):
     is_active = IsActiveField
 
     class Meta:
-        model = Participant
+        model = Respondent
         exclude = ['user']
 
     def __init__(self, *args, **kwargs):
@@ -112,16 +112,16 @@ class ParticipantChangeForm(forms.ModelForm):
         return self.initial["password"]
 
     def save(self, commit=True):
-        participant = super().save(commit=False)
-        user = participant.user
+        respondent = super().save(commit=False)
+        user = respondent.user
         user.username = self.cleaned_data['username']
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.is_active = self.cleaned_data['is_active']
         user.save()
         if commit:
-            participant.save()
-        return participant
+            respondent.save()
+        return respondent
 
 
 class RegionalAdminCreationForm(forms.ModelForm):

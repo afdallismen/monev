@@ -17,9 +17,9 @@ from django.utils.html import escape
 from django.utils.translation import gettext, gettext_lazy as _
 # end of copied dependency
 
-from account.models import Participant, RegionalAdmin
+from account.models import Respondent, RegionalAdmin
 from account.forms import (
-    ParticipantCreationForm, ParticipantChangeForm, RegionalAdminCreationForm,
+    RespondentCreationForm, RespondentChangeForm, RegionalAdminCreationForm,
     RegionalAdminChangeForm
 )
 
@@ -135,9 +135,9 @@ class BaseAccountAdmin(admin.ModelAdmin):
     is_active.admin_order_field = 'user__is_active'
 
 
-class ParticipantAdmin(BaseAccountAdmin):
-    form = ParticipantChangeForm
-    add_form = ParticipantCreationForm
+class RespondentAdmin(BaseAccountAdmin):
+    form = RespondentChangeForm
+    add_form = RespondentCreationForm
 
 
 class RegionalAdminAdmin(BaseAccountAdmin):
@@ -152,5 +152,5 @@ class RegionalAdminAdmin(BaseAccountAdmin):
 
 
 admin.site.register(RegionalAdmin, RegionalAdminAdmin)
-admin.site.register(Participant, ParticipantAdmin)
+admin.site.register(Respondent, RespondentAdmin)
 admin.site.unregister(Group)

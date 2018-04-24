@@ -11,16 +11,16 @@ from region.models import Province
 
 class User(AbstractUser):
     def get_account(self):
-        if self.is_regionaladmin and self.is_participant:
+        if self.is_regionaladmin and self.is_respondent:
             raise MultipleObjectsReturned("User can't be both a RegionalAdmin "
-                                          "and a Participant")
+                                          "and a Respondent.")
         elif self.is_regionaladmin:
             return self.regionaladmin
-        elif self.is_participant:
-            return self.participant
+        elif self.is_respondent:
+            return self.respondent
         else:
             raise ObjectDoesNotExist("User is neither a RegionalAdmin nor a "
-                                     "Participant")
+                                     "Respondent.")
 
     @property
     def is_regionaladmin(self):
@@ -28,9 +28,9 @@ class User(AbstractUser):
                 and self.regionaladmin is not None)
 
     @property
-    def is_participant(self):
-        return (hasattr(self, 'participant')
-                and self.participant is not None)
+    def is_respondent(self):
+        return (hasattr(self, 'respondent')
+                and self.respondent is not None)
 
 
 class BaseAccount(models.Model):
@@ -50,9 +50,9 @@ class RegionalAdmin(BaseAccount):
     region = models.ForeignKey(Province, on_delete=models.CASCADE)
 
     def clean(self):
-        if hasattr(self, 'user') and self.user.is_participant:
+        if hasattr(self, 'user') and self.user.is_respondent:
             raise ValidationError({
-                'user': "User already registered as a Participant."
+                'user': "User already registered as a Repondent."
             })
 
     class Meta:
@@ -60,7 +60,7 @@ class RegionalAdmin(BaseAccount):
         verbose_name_plural = "regional admins"
 
 
-class Participant(BaseAccount):
+class Respondent(BaseAccount):
     def clean(self):
         if hasattr(self, 'user') and self.user.is_regionaladmin:
             raise ValidationError({
@@ -68,5 +68,5 @@ class Participant(BaseAccount):
             })
 
     class Meta:
-        verbose_name = "participant"
-        verbose_name_plural = "participants"
+        verbose_name = "respondent"
+        verbose_name_plural = "respondents"
