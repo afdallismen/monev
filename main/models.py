@@ -46,7 +46,7 @@ class Questionnaire(models.Model):
 
 class Topic(models.Model):
     questionnaire = models.ForeignKey(Questionnaire, on_delete=models.CASCADE)
-    inner_topic = models.ForeignKey(
+    parent = models.ForeignKey(
         'self',
         blank=True,
         null=True,

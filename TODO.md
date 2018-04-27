@@ -4,3 +4,4 @@
 3. Do testing.
 4. Wrote help text for admin form field.
 5. Setup admin list filter and seacrh field(currently working on main app).
+6. Setup admin permission.
