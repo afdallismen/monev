@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+  <div class="container">
+    <h4>Choose a questionnaire :</h4>
+    <ul>
+      {% for diklat in diklats %}
+      <li>
+        {{ diklat.title }}
+        <ul>
+          {% for questionnaire in diklat.questionnaire_set.all %}
+            <li>
+              <a href={% url 'main:questionnaire_detail' pk=questionnaire.pk %}>Questionnaire {{ questionnaire.get_instrument_display }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
