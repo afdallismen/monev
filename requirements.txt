@@ -8,6 +8,7 @@ django-jsonfield==1.0.1
 django-nested-admin==3.0.21
 django-nvd3==0.9.7
 django-qsstats-magic==1.0.0
+django-smart-selects==1.5.4
 djcacheutils==3.0.0
 Jinja2==2.10
 MarkupSafe==1.0
