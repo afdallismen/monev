@@ -1,21 +1,23 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-  <div class="container">
-    <h4>Choose a questionnaire :</h4>
-    <ul>
-      {% for diklat in diklats %}
-      <li>
-        {{ diklat.title }}
-        <ul>
-          {% for questionnaire in diklat.questionnaire_set.all %}
-            <li>
-              <a href={% url 'main:questionnaire_detail' pk=questionnaire.pk %}>Questionnaire {{ questionnaire.get_instrument_display }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </li>
-      {% endfor %}
-    </ul>
+  <div class="px-0 pb-0 alert alert-success">
+    <h4 class="ml-3">Pilih kuisioner yang ingin anda isi :</h4>
+    <div class="mt-3 mb-0 alert alert-light">
+      <ol>
+        {% for diklat in diklats %}
+        <li>
+          <b>Diklat {{ diklat.title|title }}</b>
+          <ul>
+            {% for questionnaire in diklat.questionnaire_set.all %}
+              <li>
+                <a href={% url 'main:questionnaire_detail' pk=questionnaire.pk %}>Questionnaire {{ questionnaire.get_instrument_display }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endfor %}
+      </ol>
+    </div>
   </div>
 {% endblock %}

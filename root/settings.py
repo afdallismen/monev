@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'djangobower',
     'admin_tools_stats',
     'django_nvd3',
+    'smart_selects',
 ]
 
 MIDDLEWARE = [
@@ -150,6 +151,12 @@ STATICFILES_FINDERS = [
     'djangobower.finders.BowerFinder',
 ]
 
+LOGIN_REDIRECT_URL = '/questionnaire'
+
+LOGOUT_REDIRECT_URL = '/'
+
+LANGUAGE_CODE = 'ID-id'
+
 # django-admin-tools
 ADMIN_TOOLS_MENU = 'menu.CustomMenu'
 
@@ -173,3 +180,6 @@ BOWER_INSTALLED_APPS = (
     'd3#3.3.6',
     'nvd3#1.1.12-beta',
 )
+
+# smart selects
+JQUERY_URL = True

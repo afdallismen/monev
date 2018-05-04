@@ -14,4 +14,9 @@ urlpatterns = [
         views.questionnaire_detail,
         name='questionnaire_detail',
     ),
+    path(
+        'questionnaire/<int:pk>/submit',
+        views.questionnaire_submit,
+        name='questionnaire_submit'
+    )
 ]

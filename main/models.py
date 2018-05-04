@@ -1,3 +1,4 @@
+# TODO: create diklat and questionnaire list filter
 from django.db import models
 
 from account.models import Respondent
@@ -7,19 +8,19 @@ from region.models import Province, Regency
 class Diklat(models.Model):
     title = models.CharField(max_length=200)
     province = models.ForeignKey(Province, on_delete=models.CASCADE)
-    regency = models.ManyToManyField(Regency)
+    regencies = models.ManyToManyField(Regency)
     date = models.DateTimeField()
     location = models.CharField(max_length=200)
     duration = models.PositiveSmallIntegerField()
     supervisor = models.CharField(max_length=200)
-    respondents = models.PositiveSmallIntegerField()
+    num_of_participant = models.PositiveSmallIntegerField()
 
     class Meta:
         verbose_name = "diklat"
         verbose_name_plural = "diklat"
 
     def __str__(self):
-        return str(self.title).title()
+        return str(self.title)
 
 
 class Questionnaire(models.Model):
@@ -30,6 +31,7 @@ class Questionnaire(models.Model):
     )
 
     diklat = models.ForeignKey(Diklat, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
     instrument = models.CharField(max_length=2, choices=INSTRUMENT_CHOICES)
 
     class Meta:
@@ -38,10 +40,7 @@ class Questionnaire(models.Model):
         verbose_name_plural = "questionnaires"
 
     def __str__(self):
-        return "Questionnaire {} from diklat {}".format(
-            self.get_instrument_display(),
-            self.diklat
-        )
+        return str(self.title)
 
 
 class Topic(models.Model):
@@ -59,7 +58,7 @@ class Topic(models.Model):
         verbose_name_plural = "topics"
 
     def __str__(self):
-        return str(self.title).title()
+        return str(self.title)
 
 
 class Question(models.Model):
@@ -78,7 +77,7 @@ class Question(models.Model):
         verbose_name_plural = "questions"
 
     def __str__(self):
-        return str(self.text).capitalize()
+        return str(self.text)
 
 
 class Option(models.Model):
@@ -94,7 +93,7 @@ class Option(models.Model):
         verbose_name_plural = "options"
 
     def __str__(self):
-        return str(self.name).capitalize()
+        return str(self.name)
 
 
 class Measure(models.Model):
@@ -110,7 +109,7 @@ class Measure(models.Model):
         verbose_name_plural = "measures"
 
     def __str__(self):
-        return str(self.name).capitalize()
+        return str(self.name)
 
 
 class Response(models.Model):
@@ -154,5 +153,4 @@ class Recommendation(models.Model):
         verbose_name_plural = "recommendations"
 
     def __str__(self):
-        return "{!s} recommendation for question {!s}".format(
-            self.respondent, self.question)
+        return str(self.text)

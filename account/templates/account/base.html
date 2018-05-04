@@ -5,15 +5,6 @@
 </head>
 <body>
   <div class="container">
-    <ul class="nav justify-content-end">
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'main:questionnaire_index' %}">Index</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-      </li>
-    </ul>
-    <hr />
     {% block content %}{% endblock %}
   </div>
   <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

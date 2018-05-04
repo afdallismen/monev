@@ -1,103 +1,51 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-  <div class="container">
-    <h1>Questionnaire</h1>
-    <ul class="list-unstyled">
-      <li>
-        {{ questionnaire.get_instrument_display }}
-      </li>
-      <li>
-        {{ questionnaire.diklat.title|title }}
-      </li>
-    </ul>
+  <form action="{% url 'main:questionnaire_submit' questionnaire.pk %}" method="post">
+    {% csrf_token %}
+  <h3>Kuisioner <small class="text-muted">{{ questionnaire.title|title }}</small></h3>
+  <hr />
+  <div class="py-3">
     <ol type="A">
+      {% for topic in topics %}
       <li>
-        Manajemen Penyelenggaraan Diklat
-        <ol type="1">
-          <li>
-            Waktu Penyelenggaraan
-            <p>
-              Bagaimana penilaian Bapak/Ibu terkait durasi (lama waktu) pelaksanaan sesi kegiatan dalam Diklat Perlindungan Anak bagi LKSA/Panti Swasta yang telah Bapak/Ibu ikuti ?
-            </p>
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th rowspan=2>
-                    No
-                  </th>
-                  <th rowspan=2>
-                    Jenis Pertanyaan
-                  </th>
-                  <th colspan=4>
-                    Jawaban
-                  </th>
-                </tr>
-                <tr>
-                  <th>
-                    Terlalu Lama
-                  </th>
-                  <th>
-                    Sedang
-                  </th>
-                  <th>
-                    Cukup
-                  </th>
-                  <th>
-                    Kurang
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    1
-                  </td>
-                  <td>
-                    Lamanya waktu diklat
-                  </td>
-                  <td>
-                    <input type="checkbox" />
-                  </td>
-                  <td>
-                    <input type="checkbox" />
-                  </td>
-                  <td>
-                    <input type="checkbox" />
-                  </td>
-                  <td>
-                    <input type="checkbox" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    2
-                  </td>
-                  <td>
-                    Lamanya waktu diskusi
-                  </td>
-                  <td>
-                    <input type="checkbox" />
-                  </td>
-                  <td>
-                    <input type="checkbox" />
-                  </td>
-                  <td>
-                    <input type="checkbox" />
-                  </td>
-                  <td>
-                    <input type="checkbox" />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <p>
-              Saran :
-            </p>
-            <textarea rows="4" cols="100%"></textarea>
-          </li>
-        </ol>
+        <div class="pb-5">
+          <h5>{{ topic.parent.title|title }}</h5>
+          {% if topic.parent.question_set.all|length_is:"1" %}
+            {% include "main/questionnaire/_question.html" with question=topic.parent.question_set.first %}
+          {% else %}
+            <ol>
+            {% for question in topic.parent.question_set.all %}
+              <li>
+                {% include "main/questionnaire/_question.html" with question=question %}
+              </li>
+            {% endfor %}
+            </ol>
+          {% endif %}
+          <ol type="1">
+            {% for child in topic.childs %}
+            <li>
+              <b>{{ child.title|title }}</b>
+              {% if child.question_set.all|length_is:"1" %}
+                {% include "main/questionnaire/_question.html" with question=child.question_set.first %}
+              {% else %}
+                <ol>
+                {% for question in child.question_set.all %}
+                  <li>
+                    {% include "main/questionnaire/_question.html" with question=question %}
+                  </li>
+                {% endfor %}
+                </ol>
+              {% endif %}
+            </li>
+            {% endfor %}
+          </ol>
+        </div>
       </li>
+      {% endfor %}
     </ol>
   </div>
+  <hr />
+  <button type="submit" class="btn btn-primary float-right mt-3">Submit</button>
+  </form>
 {% endblock %}
