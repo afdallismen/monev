@@ -1,0 +1,225 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-08 12:02+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\main\admin.py:15
+msgid "Evaluasi Dan Monitoring Diklat"
+msgstr "Evaluasi Dan Monitoring Diklat"
+
+#: .\main\admin.py:30
+msgid "{!s} days"
+msgstr "{!s} hari"
+
+#: .\main\admin.py:31 .\main\models.py:19
+msgid "duration"
+msgstr "durasi"
+
+#: .\main\admin.py:84 .\main\models.py:104 .\main\models.py:138
+#: .\main\models.py:161 .\main\models.py:251
+msgid "question"
+msgstr "pertanyaan"
+
+#: .\main\admin.py:89 .\main\models.py:78
+msgid "topic"
+msgstr "topik"
+
+#: .\main\admin.py:143
+msgid "Administration"
+msgstr "Administrasi"
+
+#: .\main\apps.py:7
+msgid "main"
+msgstr "applikasi utama"
+
+#: .\main\filters.py:6 .\main\models.py:16
+msgid "regencies"
+msgstr "kota/kabupaten"
+
+#: .\main\models.py:10 .\main\models.py:46 .\main\models.py:75
+msgid "title"
+msgstr "judul"
+
+#: .\main\models.py:14
+msgid "province"
+msgstr "provinsi"
+
+#: .\main\models.py:17
+msgid "date"
+msgstr "tanggal"
+
+#: .\main\models.py:18
+msgid "location"
+msgstr "lokasi"
+
+#: .\main\models.py:20
+msgid "supervisor"
+msgstr "penanggung jawab"
+
+#: .\main\models.py:22
+msgid "num of participant"
+msgstr "jumlah peserta"
+
+#: .\main\models.py:25 .\main\models.py:26 .\main\models.py:44
+msgid "diklat"
+msgstr "diklat"
+
+#: .\main\models.py:34
+msgid "Instrument A"
+msgstr "Instrumen A"
+
+#: .\main\models.py:35
+msgid "Instrument B"
+msgstr "Instrumen B"
+
+#: .\main\models.py:36
+msgid "Instrument C"
+msgstr "Instrumen C"
+
+#: .\main\models.py:37
+msgid "Instrument D"
+msgstr "Instrumen D"
+
+#: .\main\models.py:38
+msgid "Instrument E"
+msgstr "Instrumen E"
+
+#: .\main\models.py:48
+msgid "instrument"
+msgstr "instrumen"
+
+#: .\main\models.py:55 .\main\models.py:66
+msgid "questionnaire"
+msgstr "kuesioner"
+
+#: .\main\models.py:56
+msgid "questionnaires"
+msgstr "kuesioner"
+
+#: .\main\models.py:73
+msgid "parent"
+msgstr "induk"
+
+#: .\main\models.py:79
+msgid "topics"
+msgstr "topik"
+
+#: .\main\models.py:86
+msgid "Essay"
+msgstr "Essay"
+
+#: .\main\models.py:87
+msgid "Objective"
+msgstr "Objektif"
+
+#: .\main\models.py:88
+msgid "Group of objective"
+msgstr "Kelompok objektif"
+
+#: .\main\models.py:100 .\main\models.py:163
+msgid "type"
+msgstr "tipe"
+
+#: .\main\models.py:101 .\main\models.py:194 .\main\models.py:253
+msgid "text"
+msgstr "teks"
+
+#: .\main\models.py:105
+msgid "questions"
+msgstr "pertanyaan"
+
+#: .\main\models.py:111
+msgid "Question{!s} for topic{!s}"
+msgstr "Pertanyaan{!s} untuk topik{!s}"
+
+#: .\main\models.py:120 .\main\models.py:126
+msgid "option"
+msgstr "pilihan"
+
+#: .\main\models.py:122 .\main\models.py:140
+msgid "name"
+msgstr "nama"
+
+#: .\main\models.py:123
+msgid "code"
+msgstr "kode"
+
+#: .\main\models.py:127
+msgid "options"
+msgstr "pilihan"
+
+#: .\main\models.py:143 .\main\models.py:229
+msgid "measure"
+msgstr "ukuran"
+
+#: .\main\models.py:144
+msgid "measures"
+msgstr "ukuran"
+
+#: .\main\models.py:156 .\main\models.py:246
+msgid "respondent"
+msgstr "responden"
+
+#: .\main\models.py:166 .\main\models.py:192 .\main\models.py:206
+#: .\main\models.py:224
+msgid "response"
+msgstr "jawaban"
+
+#: .\main\models.py:167
+msgid "responses"
+msgstr "jawaban"
+
+#: .\main\models.py:184
+msgid "Undefined response{}"
+msgstr "Jawaban tidak terdefinisi{}"
+
+#: .\main\models.py:197
+msgid "essay response"
+msgstr "jawaban essay"
+
+#: .\main\models.py:198
+msgid "essay responses"
+msgstr "jawaban essay"
+
+#: .\main\models.py:211 .\main\models.py:234
+msgid "selected"
+msgstr "terpilih"
+
+#: .\main\models.py:215
+msgid "objective response"
+msgstr "jawaban objektif"
+
+#: .\main\models.py:216
+msgid "objective responses"
+msgstr "jawaban objektif"
+
+#: .\main\models.py:238
+msgid "group of objective response"
+msgstr "jawban kelompok objektif"
+
+#: .\main\models.py:239
+msgid "group of objective responses"
+msgstr "jawaban kelompok objektif"
+
+#: .\main\models.py:257
+msgid "recommendation"
+msgstr "saran"
+
+#: .\main\models.py:258
+msgid "recommendations"
+msgstr "saran"

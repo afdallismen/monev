@@ -1,0 +1,129 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-08 12:02+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\account\admin.py:54
+#, python-format
+msgid "%(name)s object with primary key %(key)r does not exist."
+msgstr "%(name)s dengan primary key %(key)r tidak ditemukan."
+
+#: .\account\admin.py:68
+msgid "Password changed successfully."
+msgstr "Sandi berhasil diubah."
+
+#: .\account\admin.py:89
+#, python-format
+msgid "Change password: %s"
+msgstr "Ganti sandi: %s"
+
+#: .\account\admin.py:134
+msgid "is active"
+msgstr "akun aktif"
+
+#: .\account\apps.py:7
+msgid "account"
+msgstr "akun"
+
+#: .\account\forms.py:21 .\account\forms.py:135
+msgid "The two password fields didn't match."
+msgstr "Sandi yang anda masukan tidak cocok."
+
+#: .\account\forms.py:31
+msgid "Password confirmation"
+msgstr "Konfirmasi sandi"
+
+#: .\account\forms.py:34 .\account\forms.py:148
+msgid "Enter the same password as before, for verification."
+msgstr "Masukan sandi yang sama seperti sebelumnya, untuk konfirmasi."
+
+#: .\account\forms.py:88 .\account\forms.py:203
+msgid ""
+"Raw passwords are not stored, so there is no way to see this user's "
+"password, but you can change the password using <a href=\"{}\">this form</a>."
+msgstr ""
+"Tidak bisa melihat sandi, tapi anda bisa mengubah sandi menggunakan <a href"
+"\"{}\">form ini</a>."
+
+#: .\account\models.py:16
+msgid "User can't be both a RegionalAdmin and a Respondent."
+msgstr "Pengguna tidak bisa memiliki akun admin wilayah dan responden."
+
+#: .\account\models.py:23
+msgid "User is neither a RegionalAdmin nor a Respondent."
+msgstr "Penggunan tidak memiliki akun admin wilayah atau responden"
+
+#: .\account\models.py:53
+msgid "region"
+msgstr "wilayah"
+
+#: .\account\models.py:59
+msgid "User already registered as a Repondent."
+msgstr "Pengguna telah terdaftar sebagai responden"
+
+#: .\account\models.py:63
+msgid "regional admin"
+msgstr "admin wilayah"
+
+#: .\account\models.py:64
+msgid "regional admins"
+msgstr "admin wilayah"
+
+#: .\account\models.py:69
+msgid "Male"
+msgstr "Pria"
+
+#: .\account\models.py:70
+msgid "Female"
+msgstr "Perempuan"
+
+#: .\account\models.py:74
+msgid "gender"
+msgstr "jenis kelamin"
+
+#: .\account\models.py:78
+msgid "age"
+msgstr "umur"
+
+#: .\account\models.py:80
+msgid "workplace"
+msgstr "unit kerja lembaga/organisasi"
+
+#: .\account\models.py:86
+msgid "position"
+msgstr "jabatan"
+
+#: .\account\models.py:92
+msgid "year of service"
+msgstr "masa/lama kerja"
+
+#: .\account\models.py:97
+msgid "last education"
+msgstr "pendidikan terakhir"
+
+#: .\account\models.py:106
+msgid "User already registered as a RegionalAdmin."
+msgstr "Pengguna telah terdaftar sebagai admin wilayah"
+
+#: .\account\models.py:110
+msgid "respondent"
+msgstr "responden"
+
+#: .\account\models.py:111
+msgid "respondents"
+msgstr "responden"

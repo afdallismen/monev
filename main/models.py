@@ -1,23 +1,29 @@
-# TODO: create diklat and questionnaire list filter
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+
 
 from account.models import Respondent
 from region.models import Province, Regency
 
 
 class Diklat(models.Model):
-    title = models.CharField(max_length=200)
-    province = models.ForeignKey(Province, on_delete=models.CASCADE)
-    regencies = models.ManyToManyField(Regency)
-    date = models.DateTimeField()
-    location = models.CharField(max_length=200)
-    duration = models.PositiveSmallIntegerField()
-    supervisor = models.CharField(max_length=200)
-    num_of_participant = models.PositiveSmallIntegerField()
+    title = models.CharField(_("title"), max_length=200)
+    province = models.ForeignKey(
+        Province,
+        on_delete=models.CASCADE,
+        verbose_name=_("province"),
+    )
+    regencies = models.ManyToManyField(Regency, verbose_name=_("regencies"))
+    date = models.DateTimeField(_("date"))
+    location = models.CharField(_("location"), max_length=200)
+    duration = models.PositiveSmallIntegerField(_("duration"))
+    supervisor = models.CharField(_("supervisor"), max_length=200)
+    num_of_participant = models.PositiveSmallIntegerField(
+        _("num of participant"))
 
     class Meta:
-        verbose_name = "diklat"
-        verbose_name_plural = "diklat"
+        verbose_name = _("diklat")
+        verbose_name_plural = _("diklat")
 
     def __str__(self):
         return str(self.title)
@@ -25,72 +31,100 @@ class Diklat(models.Model):
 
 class Questionnaire(models.Model):
     INSTRUMENT_CHOICES = (
-        ('0', "Instrument A"),
-        ('1', "Instrument B"),
-        ('2', "Instrument C"),
+        ('instrument_a', _("Instrument A")),
+        ('instrument_b', _("Instrument B")),
+        ('instrument_c', _("Instrument C")),
+        ('instrument_d', _("Instrument D")),
+        ('instrument_e', _("Instrument E")),
     )
 
-    diklat = models.ForeignKey(Diklat, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
-    instrument = models.CharField(max_length=2, choices=INSTRUMENT_CHOICES)
+    diklat = models.ForeignKey(
+        Diklat,
+        on_delete=models.CASCADE,
+        verbose_name=_("diklat"),
+    )
+    title = models.CharField(_("title"), max_length=200)
+    instrument = models.CharField(
+        _("instrument"),
+        max_length=12,
+        choices=INSTRUMENT_CHOICES,
+    )
 
     class Meta:
         unique_together = ('diklat', 'instrument')
-        verbose_name = "questionnaire"
-        verbose_name_plural = "questionnaires"
+        verbose_name = _("questionnaire")
+        verbose_name_plural = _("questionnaires")
 
     def __str__(self):
         return str(self.title)
 
 
 class Topic(models.Model):
-    questionnaire = models.ForeignKey(Questionnaire, on_delete=models.CASCADE)
+    questionnaire = models.ForeignKey(
+        Questionnaire,
+        on_delete=models.CASCADE,
+        verbose_name=_("questionnaire"),
+    )
     parent = models.ForeignKey(
         'self',
+        on_delete=models.CASCADE,
         blank=True,
         null=True,
-        on_delete=models.CASCADE,
+        verbose_name=_("parent")
     )
-    title = models.CharField(max_length=200)
+    title = models.CharField(_("title"), max_length=200)
 
     class Meta:
-        verbose_name = "topic"
-        verbose_name_plural = "topics"
+        verbose_name = _("topic")
+        verbose_name_plural = _("topics")
 
     def __str__(self):
         return str(self.title)
 
 
-class Question(models.Model):
-    TYPE_CHOICES = (
-        ("0", "essay"),
-        ("1", "objective"),
-        ("2", "group of objective"),
-    )
+TYPE_CHOICES = (
+    ('essay', _("Essay")),
+    ('objective', _("Objective")),
+    ('group_of_objective', _("Group of objective")),
+)
 
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-    type = models.CharField(max_length=1, choices=TYPE_CHOICES)
-    text = models.TextField(blank=True, default="")
+
+class Question(models.Model):
+    TYPE_CHOICES = TYPE_CHOICES
+
+    topic = models.ForeignKey(
+        Topic,
+        on_delete=models.CASCADE,
+        verbose_name=("topic"),
+    )
+    type = models.CharField(_("type"), max_length=18, choices=TYPE_CHOICES)
+    text = models.TextField(_("text"), blank=True, default="")
 
     class Meta:
-        verbose_name = "question"
-        verbose_name_plural = "questions"
+        verbose_name = _("question")
+        verbose_name_plural = _("questions")
 
     def __str__(self):
-        return str(self.text)
+        if self.text:
+            return str(self.text)
+        else:
+            return _("Question{!s} for topic{!s}").format(
+                self.id, self.topic)
 
 
 class Option(models.Model):
     question = models.ForeignKey(
         Question,
-        limit_choices_to={'type__in': ['1', '2']},
-        on_delete=models.CASCADE)
-    name = models.CharField(max_length=200)
-    order = models.PositiveSmallIntegerField()
+        on_delete=models.CASCADE,
+        limit_choices_to={'type__in': ['objective', 'group_of_objective']},
+        verbose_name=_("option"),
+    )
+    name = models.CharField(_("name"), max_length=200)
+    code = models.CharField(_("code"), max_length=5)
 
     class Meta:
-        verbose_name = "option"
-        verbose_name_plural = "options"
+        verbose_name = _("option")
+        verbose_name_plural = _("options")
 
     def __str__(self):
         return str(self.name)
@@ -99,58 +133,129 @@ class Option(models.Model):
 class Measure(models.Model):
     question = models.ForeignKey(
         Question,
-        limit_choices_to={'type__in': ['2', '3']},
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        limit_choices_to={'type__in': ['objective', 'group_of_objective']},
+        verbose_name=_("question"),
     )
-    name = models.CharField(max_length=200)
+    name = models.CharField(_("name"), max_length=200)
 
     class Meta:
-        verbose_name = "measure"
-        verbose_name_plural = "measures"
+        verbose_name = _("measure")
+        verbose_name_plural = _("measures")
 
     def __str__(self):
         return str(self.name)
 
 
 class Response(models.Model):
-    respondent = models.ForeignKey(Respondent, on_delete=models.CASCADE)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    text = models.TextField(
-        null=True,
-        blank=True,
-    )
-    measure = models.ForeignKey(
-        Measure,
+    TYPE_CHOICES = TYPE_CHOICES
+
+    respondent = models.ForeignKey(
+        Respondent,
         on_delete=models.CASCADE,
-        null=True,
-        blank=True,
+        verbose_name=_("respondent"),
+    )
+    question = models.ForeignKey(
+        Question,
+        on_delete=models.CASCADE,
+        verbose_name=_("question"),
+    )
+    type = models.CharField(_("type"), max_length=18, choices=TYPE_CHOICES)
+
+    class Meta:
+        verbose_name = _("response")
+        verbose_name_plural = _("responses")
+
+    def type_is(self, type):
+        has_relation = hasattr(
+            self, '{}response'.format(type.replace("_", "")))
+        if self.type == type and has_relation:
+            return True
+        return False
+
+    def __str__(self):
+        if self.type_is('essay'):
+            return str(self.essayresponse.text)
+        elif self.type_is('objective'):
+            return str(self.objectiveresponse.selected)
+        elif self.type_is('group_of_objective'):
+            return str(self.groupofobjectiveresponse.selected)
+        else:
+            return _("Undefined response{}").format(self.id)
+
+
+class EssayResponse(models.Model):
+    response = models.OneToOneField(
+        Response,
+        on_delete=models.CASCADE,
+        limit_choices_to={'type': 'essay'},
+        verbose_name=_("response"),
+    )
+    text = models.TextField(_("text"))
+
+    class Meta:
+        verbose_name = _("essay response")
+        verbose_name_plural = _("essay responses")
+
+
+class ObjectiveResponse(models.Model):
+    response = models.OneToOneField(
+        Response,
+        on_delete=models.CASCADE,
+        limit_choices_to={'type': 'objective'},
+        verbose_name=_("response"),
     )
     selected = models.ForeignKey(
         Option,
         on_delete=models.CASCADE,
-        null=True,
-        blank=True,
+        verbose_name=_("selected"),
     )
 
     class Meta:
-        verbose_name = "response"
-        verbose_name_plural = "responses"
+        verbose_name = _("objective response")
+        verbose_name_plural = _("objective responses")
 
-    def __str__(self):
-        return "{!s} respond for question '{!s}'".format(
-            self.respondent,
-            self.question,
-        )
+
+class GroupOfObjectiveResponse(models.Model):
+    response = models.OneToOneField(
+        Response,
+        on_delete=models.CASCADE,
+        limit_choices_to={'type': 'group_of_objective'},
+        verbose_name=_("response")
+    )
+    measure = models.ForeignKey(
+        Measure,
+        on_delete=models.CASCADE,
+        verbose_name=_("measure"),
+    )
+    selected = models.ForeignKey(
+        Option,
+        on_delete=models.CASCADE,
+        verbose_name=_("selected"),
+    )
+
+    class Meta:
+        verbose_name = _("group of objective response")
+        verbose_name_plural = _("group of objective responses")
 
 
 class Recommendation(models.Model):
-    respondent = models.ForeignKey(Respondent, on_delete=models.CASCADE)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    text = models.TextField(blank=True, default="")
+    respondent = models.ForeignKey(
+        Respondent,
+        on_delete=models.CASCADE,
+        verbose_name=_("respondent"),
+    )
+    question = models.ForeignKey(
+        Question,
+        on_delete=models.CASCADE,
+        verbose_name=_("question"),
+    )
+    text = models.TextField(_("text"), blank=True, default="")
 
     class Meta:
-        verbose_name = "recommendation"
-        verbose_name_plural = "recommendations"
+        unique_together = ('respondent', 'question')
+        verbose_name = _("recommendation")
+        verbose_name_plural = _("recommendations")
 
     def __str__(self):
         return str(self.text)

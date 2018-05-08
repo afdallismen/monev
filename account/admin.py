@@ -131,6 +131,7 @@ class BaseAccountAdmin(admin.ModelAdmin):
 
     def is_active(self, acc):
         return acc.user.is_active
+    is_active.short_description = _("is active")
     is_active.boolean = True
     is_active.admin_order_field = 'user__is_active'
 
@@ -149,6 +150,15 @@ class RegionalAdminAdmin(BaseAccountAdmin):
         super().__init__(*args, **kwargs)
         self.list_display = self.list_display + ('region', )
         self.search_fields = self.search_fields + ['region__name']
+
+    def has_add_permission(self, request):
+        return request.user.is_superuser
+
+    def has_change_permission(self, request, obj=None):
+        return request.user.is_superuser or obj == request.user.regionaladmin
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
 
 
 admin.site.register(RegionalAdmin, RegionalAdminAdmin)

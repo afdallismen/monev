@@ -1,11 +1,18 @@
 import nested_admin
 
+from django.contrib.admin import AdminSite
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
+
 
 from main.models import (
     Diklat, Questionnaire, Topic, Question, Option, Measure, Response,
-    Recommendation
+    Recommendation, EssayResponse, ObjectiveResponse, GroupOfObjectiveResponse
 )
+
+
+class MainAdminSite(AdminSite):
+    site_header = _("Evaluasi Dan Monitoring Diklat")
 
 
 class DiklatAdmin(admin.ModelAdmin):
@@ -13,14 +20,26 @@ class DiklatAdmin(admin.ModelAdmin):
     search_fields = ['title']
     list_display = ('__str__', 'date', 'duration_display',
                     'num_of_participant', 'supervisor', 'location')
-    # regencies need custom list filter
-    list_filter = ['province', 'regencies']
+    list_filter = [
+        ('province', admin.RelatedOnlyFieldListFilter),
+        ('regencies', admin.RelatedOnlyFieldListFilter),
+    ]
     date_hierarchy = 'date'
 
     def duration_display(self, obj):
-        return "{!s} days".format(obj.duration)
-    duration_display.short_description = "duration"
-    duration_display.admin_order_field = "duration"
+        return _("{!s} days").format(obj.duration)
+    duration_display.short_description = _("duration")
+    duration_display.admin_order_field = 'duration'
+
+    def has_add_permission(self, request):
+        return request.user.is_superuser
+
+    def has_change_permission(self, request, obj=None):
+        return (request.user.is_superuser or
+                obj.province == request.user.regionaladmin.region)
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
 
 
 class MeasureInline(nested_admin.NestedTabularInline):
@@ -48,16 +67,26 @@ class TopicInline(nested_admin.NestedStackedInline):
 class QuestionnaireAdmin(nested_admin.NestedModelAdmin):
     inlines = [TopicInline]
     search_fields = ['diklat__title']
-    list_display = ('__str__', 'instrument')
+    list_display = ('__str__', 'instrument', 'diklat')
     list_filter = ['diklat']
     date_hierarchy = 'diklat__date'
+
+    def has_change_permission(self, request, obj=None):
+        return (request.user.is_superuser or
+                obj.diklat.province == request.user.regionaladmin.region)
 
 
 def question_display(obj):
     if len(str(obj.question)) > 40:
         return "{}...".format(str(obj.question)[:40])
-    return str(obj.title)
-question_display.short_description = "question"  # noqa
+    else:
+        return str(obj.question)
+question_display.short_description = _("question")  # noqa
+
+
+def topic_display(obj):
+    return str(obj.question.topic).title()
+topic_display.short_description = _("topic")  # noqa
 
 
 class RecommendationAdmin(admin.ModelAdmin):
@@ -65,15 +94,23 @@ class RecommendationAdmin(admin.ModelAdmin):
         'respondent__user__first_name',
         'respondent__user__last_name',
     ]
-    list_display = ('title_display', question_display, 'respondent')
-    # add questionnaire list filter
+    list_display = (question_display, topic_display, 'respondent')
+    list_filter = [
+        ('question__topic__questionnaire', admin.RelatedOnlyFieldListFilter),
+    ]
 
-    def title_display(self, obj):
-        if len(str(obj.text)) > 15:
-            return "{}...".format(str(obj.text)[:15])
-        return str(obj.title)
-    title_display.short_description = "recommendation"
-    title_display.admin_order_field = "pk"
+    # these permission return true for easy testing purpose
+    def has_add_permission(self, request):
+        return True
+
+    def has_change_permission(self, request, obj=None):
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        return True
+
+    def has_module_permission(self, request):
+        return True
 
 
 class ResponseAdmin(admin.ModelAdmin):
@@ -82,14 +119,36 @@ class ResponseAdmin(admin.ModelAdmin):
         'respondent__user__last_name',
     ]
     # create a response with text
-    list_display = ('response_display', 'respondent', question_display,
-                    'measure', 'selected', 'text')
+    list_display = ('__str__', 'respondent', 'type',
+                    topic_display)
 
-    def response_display(self, obj):
-        return "!icon here"  # change this with link icon
+    # these permission return true for easy testing purpose
+    def has_add_permission(self, request):
+        return True
 
+    def has_change_permission(self, request, obj=None):
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        return True
+
+    def has_module_permission(self, request):
+        return True
+
+
+class BasicAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.site_header = _("Administration")
+admin.site.site_url = None
 
 admin.site.register(Diklat, DiklatAdmin)
 admin.site.register(Questionnaire, QuestionnaireAdmin)
 admin.site.register(Recommendation, RecommendationAdmin)
 admin.site.register(Response, ResponseAdmin)
+
+models = [EssayResponse, ObjectiveResponse, GroupOfObjectiveResponse]
+
+for model in models:
+    admin.site.register(model, BasicAdmin)
