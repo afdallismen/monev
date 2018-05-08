@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      {% if questionnaires|length_is:"0" %}
+        <div class="alert alert-warning">
+          Maaf, belum ada kuisioner yang dapat anda isi.
+        </div>
+      {% else %}
+        <p class="text-muted"><span class="pb-1">Pilih kuisioner yang ingin anda isi :</span></p>
+        <ul class="list-unstyled ml-3">
+          {% for questionnaire in questionnaires %}
+            <li><a href="{% url 'main:questionnaire_detail' pk=questionnaire.pk %}">{{questionnaire.title|title}}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

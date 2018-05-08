@@ -1,0 +1,59 @@
+<div class="py-4">
+  <p>
+    {{ question.text|capfirst }}
+  </p>
+
+  {% if question.get_type_display == "essay" %}
+    <textarea rows="5" cols="130" name="e{{question.id}}" required></textarea>
+  {% elif question.get_type_display == "objective" %}
+    {% for option in question.option_set.all %}
+      <input type="radio" name="o{{question.id}}" value="{{option.id}}" required /> {{option.name|title}}<br />
+    {% endfor %}
+  {% else %}
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th rowspan="2">
+            No.
+          </th>
+          <th rowspan="2">
+            Pertanyaan
+          </th>
+          <th colspan="{{ question.option_set.all|length }}">
+            Jawaban
+          </th>
+        </tr>
+        <tr>
+          {% for option in question.option_set.all %}
+            <th>
+              {{ option.name|title }}
+            </th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for measure in question.measure_set.all %}
+          <tr>
+            <td>
+              {{ forloop.counter }}.
+            </td>
+            <td>
+              {{ measure.name|capfirst }}
+            </td>
+            {% for option in question.option_set.all %}
+              <td>
+                <input type="radio" name="g{{measure.id}}" value="{{option.id}}" required />
+              </td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+  {% if question.get_type_display != "essay" %}
+  <div class="pt-3">
+    <p>Saran:</p>
+    <textarea name="r{{ question.id }}" rows="5" cols="130"></textarea>
+  </div>
+  {% endif %}
+</div>

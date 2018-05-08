@@ -132,3 +132,9 @@ STATIC_URL = '/static/'
 # Custom settings
 
 AUTH_USER_MODEL = 'account.User'
+
+LOGIN_REDIRECT_URL = 'main:questionnaire_list'
+
+LOGIN_URL = 'account:login'
+
+LOGOUT_REDIRECT_URL = 'account:login'

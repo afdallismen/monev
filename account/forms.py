@@ -1,5 +1,7 @@
+import unicodedata
+
 from django import forms
-from django.contrib.auth import get_user_model, password_validation
+from django.contrib.auth import get_user_model, password_validation, validators
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.utils.translation import gettext_lazy as _
 
@@ -7,6 +9,14 @@ from account.models import Respondent, RegionalAdmin
 
 
 User = get_user_model()
+
+
+class CustomUsernameField(forms.CharField):
+    default_validators = [validators.UnicodeUsernameValidator]
+
+    def to_python(self, value):
+        return unicodedata.normalize('NFKC', super().to_python(value))
+
 
 user_fields = forms.models.fields_for_model(model=User)
 
@@ -22,7 +32,7 @@ class RespondentCreationForm(forms.ModelForm):
     }
     username = UsernameField
     password1 = forms.CharField(
-        label="Password",
+        label=_("Password"),
         strip=False,
         widget=forms.PasswordInput,
         help_text=password_validation.password_validators_help_text_html(),
@@ -42,6 +52,7 @@ class RespondentCreationForm(forms.ModelForm):
         fields = ['username', 'password1', 'password2', 'first_name',
                   'last_name', 'gender', 'age', 'last_education', 'workplace',
                   'position', 'year_of_service']
+        field_classes = {'username': CustomUsernameField}
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -99,6 +110,7 @@ class RespondentChangeForm(forms.ModelForm):
         fields = ['username', 'password', 'first_name', 'last_name', 'gender',
                   'age', 'last_education', 'workplace', 'position',
                   'year_of_service']
+        field_classes = {'username': CustomUsernameField}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -197,6 +197,9 @@ class EssayResponse(models.Model):
         verbose_name = _("essay response")
         verbose_name_plural = _("essay responses")
 
+    def __str__(self):
+        return self.text
+
 
 class ObjectiveResponse(models.Model):
     response = models.OneToOneField(
@@ -214,6 +217,9 @@ class ObjectiveResponse(models.Model):
     class Meta:
         verbose_name = _("objective response")
         verbose_name_plural = _("objective responses")
+
+    def __str__(self):
+        return self.selected
 
 
 class GroupOfObjectiveResponse(models.Model):
@@ -237,6 +243,9 @@ class GroupOfObjectiveResponse(models.Model):
     class Meta:
         verbose_name = _("group of objective response")
         verbose_name_plural = _("group of objective responses")
+
+    def __str__(self):
+        return self.selected
 
 
 class Recommendation(models.Model):

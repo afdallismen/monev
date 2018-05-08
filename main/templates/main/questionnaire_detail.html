@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <form action="{% url 'main:questionnaire_submit' questionnaire.pk %}" method="post">
+    {% csrf_token %}
+  <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8 mb-5"><h4 class="text-center">{{ questionnaire.title|title }}</h4></div>
+  </div>
+  <div class="py-3">
+    <ol type="A">
+      {% for topic in topics %}
+      <li>
+        <div class="pb-5">
+          <h5>{{ topic.parent.title|title }}</h5>
+          {% if topic.parent.question_set.all|length_is:"1" %}
+            {% include "main/_question.html" with question=topic.parent.question_set.first %}
+          {% else %}
+            <ol>
+            {% for question in topic.parent.question_set.all %}
+              <li>
+                {% include "main/_question.html" with question=question %}
+              </li>
+            {% endfor %}
+            </ol>
+          {% endif %}
+          <ol type="1">
+            {% for child in topic.childs %}
+            <li>
+              <b>{{ child.title|title }}</b>
+              {% if child.question_set.all|length_is:"1" %}
+                {% include "main/_question.html" with question=child.question_set.first %}
+              {% else %}
+                <ol>
+                {% for question in child.question_set.all %}
+                  <li>
+                    {% include "main/_question.html" with question=question %}
+                  </li>
+                {% endfor %}
+                </ol>
+              {% endif %}
+            </li>
+            {% endfor %}
+          </ol>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+  <hr />
+  <button type="submit" class="btn btn-primary float-right mt-3">Submit</button>
+  </form>
+</div>
+{% endblock %}
