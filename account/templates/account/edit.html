@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+  <!-- <link rel="stylesheet" href="{% static 'css/register_page.css' %}"/> -->
+{% endblock %}
+
+{% block content %}
+<div class="container h-100">
+  <div class="row justify-content-center align-items-center h-100 py-5">
+    <div class="col-sm-8 border px-4 pt-3 pb-4">
+      <div>
+        <h4 class="text-primary">Registrasi Akun</h4>
+        <span class="text-muted">Situs Evaluasi dan Monitoring Diklat</span>
+        <hr />
+      </div>
+
+      {% if form.errors %}
+        <div class="alert alert-danger mb-4" role="alert">
+          {{form.errors|safe}}
+        </div>
+      {% endif %}
+
+      <form method="post" action="{% url 'account:register' %}" class="mt-4">
+        {% csrf_token %}
+        <div class="form-group row mb-4">
+          <label for="{{form.username.id_for_label}}" class="col-sm-5 col-form-label">Nama pengguna*</label>
+          <div class="col-sm-7">
+            <input
+              type="text"
+              class="form-control"
+              name="{{form.username.name}}"
+              id="{{form.username.id_for_label}}"
+              value={{form.username.value}}
+              required
+              autofocus
+            />
+            <small id="{{form.username.id_for_label}}helptext" class="form-text text-muted">{{form.username.help_text|safe}}</small>
+          </div>
+        </div>
+
+        <div class="form-group row mb-4">
+          <label for="{{form.password.id_for_label}}" class="col-sm-5 col-form-label">Sandi</label>
+          <div class="col-sm-7">
+            <input
+              type="password"
+              class="form-control"
+              name="{{form.password1.name}}"
+              id="{{form.password1.id_for_label}}"
+              value="{{form.password.value}}"
+              required
+            />
+            <small id="{{form.password.id_for_label}}helptext" class="form-text text-muted">{{form.password.help_text|safe}}</small>
+          </div>
+        </div>
+
+        <div class="form-group row mb-4">
+          <label for="{{form.first_name.id_for_label}}" class="col-sm-5 col-form-label">Nama depan*</label>
+          <div class="col-sm-7">
+            <input
+              type="text"
+              class="form-control"
+              name="{{form.first_name.name}}"
+              id="{{form.first_name.id_for_label}}"
+              value="{{form.first_name.value}}"
+              required
+            />
+            <small id="{{form.first_name.id_for_label}}helptext" class="form-text text-muted">{{form.first_name.help_text|safe}}</small>
+          </div>
+        </div>
+
+        <div class="form-group row mb-4">
+          <label for="{{form.last_name.id_for_label}}" class="col-sm-5 col-form-label">Nama belakang</label>
+          <div class="col-sm-7">
+            <input
+              type="text"
+              class="form-control"
+              name="{{form.last_name.name}}"
+              id="{{form.last_name.id_for_label}}"
+              value="{{form.last_name.value}}"
+            />
+            <small id="{{form.last_name.id_for_label}}helptext" class="form-text text-muted">{{form.last_name.help_text|safe}}</small>
+          </div>
+        </div>
+
+        <div class="form-group row mb-4">
+          <label for="{{form.gender.id_for_label}}" class="col-sm-5 col-form-label">Jenis kelamin*</label>
+          <div class="col-sm-7">
+            <select class="form-control" name="{{form.gender.name}}" id="{{form.gender.id_for_label}}">
+              {% for key, val in form.fields.gender.choices %}
+                <option value={{key}} required>{{val}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row mb-4">
+          <label for="{{form.age.id_for_label}}" class="col-sm-5 col-form-label">Umur*</label>
+          <div class="col-sm-7">
+            <input
+              type="number"
+              class="form-control"
+              name="{{form.age.name}}"
+              id="{{form.age.id_for_label}}"
+              required
+            />
+            <small id="{{form.age.id_for_label}}helptext" class="form-text text-muted">{{form.age.help_text|safe}}</small>
+          </div>
+        </div>
+
+        <div class="form-group row mb-4">
+          <label for="{{form.last_education.id_for_label}}" class="col-sm-5 col-form-label">Pendidikan terakhir</label>
+          <div class="col-sm-7">
+            <input
+              type="text"
+              class="form-control"
+              name="{{form.last_education.name}}"
+              id="{{form.last_education.id_for_label}}"
+            />
+            <small id="{{form.last_education.id_for_label}}helptext" class="form-text text-muted">{{form.last_education.help_text|safe}}</small>
+          </div>
+        </div>
+
+        <div class="form-group row mb-4">
+          <label for="{{form.workplace.id_for_label}}" class="col-sm-5 col-form-label">Unit kerja lembaga/organisasi</label>
+          <div class="col-sm-7">
+            <input
+              type="text"
+              class="form-control"
+              name="{{form.workplace.name}}"
+              id="{{form.workplace.id_for_label}}"
+            />
+            <small id="{{form.workplace.id_for_label}}helptext" class="form-text text-muted">{{form.workplace.help_text|safe}}</small>
+          </div>
+        </div>
+
+        <div class="form-group row mb-4">
+          <label for="{{form.position.id_for_label}}" class="col-sm-5 col-form-label">Jabatan</label>
+          <div class="col-sm-7">
+            <input
+              type="text"
+              class="form-control"
+              name="{{form.position.name}}"
+              id="{{form.position.id_for_label}}"
+            />
+            <small id="{{form.position.id_for_label}}helptext" class="form-text text-muted">{{form.position.help_text|safe}}</small>
+          </div>
+        </div>
+
+        <div class="form-group row mb-4">
+          <label for="{{form.year_of_service.id_for_label}}" class="col-sm-5 col-form-label">Masa/lama kerja</label>
+          <div class="col-sm-7">
+            <input
+              type="number"
+              class="form-control"
+              name="{{form.year_of_service.name}}"
+              id="{{form.year_of_service.id_for_label}}"
+            />
+            <small id="{{form.year_of_service.id_for_label}}helptext" class="form-text text-muted">{{form.year_of_service.help_text|safe}}</small>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="row no-gutters">
+          <div class="col-sm-6">
+            <button class="btn btn-primary btn-block rounded-0 border" type="submit">Daftar</button>
+          </div>
+          <div class="col-sm-6">
+            <a class="btn btn-primary btn-block rounded-0 border" href="{% url 'account:login' %}">Login</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -3,13 +3,23 @@
     {{ question.text|capfirst }}
   </p>
 
-  {% if question.get_type_display == "essay" %}
+  {% if question.type == "essay" %}
     <textarea rows="5" cols="130" name="e{{question.id}}" required></textarea>
-  {% elif question.get_type_display == "objective" %}
+  {% elif question.type == "objective" %}
     {% for option in question.option_set.all %}
       <input type="radio" name="o{{question.id}}" value="{{option.id}}" required /> {{option.name|title}}<br />
     {% endfor %}
   {% else %}
+    {% if question.index_as_table_head %}
+      <div class="float-right text-right">
+        <b>Keterangan jawaban:</b>
+        <ul class="list-unstyled">
+          {% for option in question.option_set.all %}
+            <li>{{ option.name|title }} = {{ forloop.counter }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -26,7 +36,11 @@
         <tr>
           {% for option in question.option_set.all %}
             <th>
-              {{ option.name|title }}
+              {% if question.index_as_table_head %}
+                {{ forloop.counter }}
+              {% else %}
+                {{ option.name|title }}
+              {% endif %}
             </th>
           {% endfor %}
         </tr>
@@ -50,7 +64,7 @@
       </tbody>
     </table>
   {% endif %}
-  {% if question.get_type_display != "essay" %}
+  {% if question.type != "essay" and question.with_recommendation %}
   <div class="pt-3">
     <p>Saran:</p>
     <textarea name="r{{ question.id }}" rows="5" cols="130"></textarea>

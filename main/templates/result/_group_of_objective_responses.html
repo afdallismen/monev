@@ -1,0 +1,44 @@
+{% for measure in question.measure_set.all %}
+  <table class="table table-sm table-bordered">
+    <caption>{{ measure.name }}</caption>
+    <thead>
+      <tr>
+        <th rowspan="2">
+          No.
+        </th>
+        <th rowspan="2">
+          Responden
+        </th>
+        <th colspan="{{ options|length }}">
+          Jawaban
+        </th>
+      </tr>
+      <tr>
+        {% for option in options %}
+          <th>{{ option.code|upper }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for response in responses %}
+        {% if response.groupofobjectiveresponse.measure == measure %}
+          <tr>
+            <td>
+              {{ forloop.counter|add:"-forloop.parentloop"|add:"1" }}
+            </td>
+            <td>
+              {{ response.respondent }}
+            </td>
+            {% for option in options %}
+              <td>
+                {% if option == response.groupofobjectiveresponse.selected %}
+                  &#10003;
+                {% endif %}
+              </td>
+            {% endfor %}
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+{% endfor %}

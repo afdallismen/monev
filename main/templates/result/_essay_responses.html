@@ -1,0 +1,29 @@
+<table class="table table-sm table-bordered">
+  <thead>
+    <tr>
+      <th>
+        No.
+      </th>
+      <th>
+        Responden
+      </th>
+      <th>
+        Jawaban
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for response in responses %}
+      <tr>
+        <td>
+          {{ forloop.counter }}
+        </td>
+        <td>
+          {{ response.respondent }}
+        </td>
+        <td>
+          {{ response.essayresponse.text }}
+        </td>
+      </tr>
+    {% endfor %}
+</table>

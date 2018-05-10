@@ -1,0 +1,19 @@
+<div class="pb-5">
+  {% if question.type != "essay"%}
+    <div class="text-right text-muted">
+      <p>Keterangan jawaban:</p>
+      <ul class="list-unstyled">
+        {% for option in question.option_set.all %}
+          <li>{{ option.name|title }} = {{ option.code|upper }}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  {% if question.type == "essay" %}
+    {% include "result/_essay_responses.html" with responses=responses %}
+  {% elif question.type == "objective" %}
+    {% include "result/_objective_responses.html" with responses=responses options=question.option_set.all %}
+  {% else %}
+    {% include "result/_group_of_objective_responses.html" with responses=responses options=question.option_set.all %}
+  {% endif %}
+</div>

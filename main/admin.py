@@ -2,6 +2,8 @@ import nested_admin
 
 from django.contrib.admin import AdminSite
 from django.contrib import admin
+from django.urls import reverse
+from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
 
@@ -67,13 +69,19 @@ class TopicInline(nested_admin.NestedStackedInline):
 class QuestionnaireAdmin(nested_admin.NestedModelAdmin):
     inlines = [TopicInline]
     search_fields = ['diklat__title']
-    list_display = ('__str__', 'instrument', 'diklat')
+    list_display = ('__str__', 'instrument', 'diklat', 'responses')
     list_filter = ['diklat']
     date_hierarchy = 'diklat__date'
 
     def has_change_permission(self, request, obj=None):
         return (request.user.is_superuser or
                 obj.diklat.province == request.user.regionaladmin.region)
+
+    def responses(self, obj):
+        return format_html(
+            "<a href='{}' target='blank'><b>Result</b></a>",
+            reverse('main:questionnaire_responses', kwargs={'pk': obj.pk})
+        )
 
 
 def question_display(obj):

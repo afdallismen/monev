@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap-4.1.1/dist/css/bootstrap.min.css' %}">
+
+    <!-- Custom css -->
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+
+    {% block header %}{% endblock %}
+
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'bootstrap-4.1.1/dist/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

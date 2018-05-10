@@ -99,6 +99,14 @@ class Question(models.Model):
     )
     type = models.CharField(_("type"), max_length=18, choices=TYPE_CHOICES)
     text = models.TextField(_("text"), blank=True, default="")
+    with_recommendation = models.BooleanField(
+        _("with recommendation"),
+        default=True,
+    )
+    index_as_table_head = models.BooleanField(
+        _("index as table head"),
+        default=False,
+    )
 
     class Meta:
         verbose_name = _("question")
@@ -137,7 +145,7 @@ class Measure(models.Model):
         limit_choices_to={'type__in': ['objective', 'group_of_objective']},
         verbose_name=_("question"),
     )
-    name = models.CharField(_("name"), max_length=200)
+    name = models.TextField(_("name"), max_length=200)
 
     class Meta:
         verbose_name = _("measure")

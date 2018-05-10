@@ -1,0 +1,46 @@
+{% extends 'result/base.html' %}
+
+{% block content %}
+<div class="container pt-5">
+  <div>
+    <ul class="list-unstyled">
+      <li>Diklat : {{ questionnaire.diklat.title|title }}</li>
+      <li>Instrumen : {{ questionnaire.get_instrument_display }}</li>
+      <li>Jumlah responden : {{ num_of_responses }}/{{ questionnaire.diklat.num_of_participant }} </li>
+    </ul>
+  </div>
+  <hr />
+  <div class="mt-4">
+    <ol type="A">
+      {% for data in topics %}
+        <li>
+          {{ data.parent.topic.title|upper }}
+        </li>
+        <ol>
+          {% for response in data.parent.responses %}
+            <li>
+              <p>{{ response.question.text }}</p>
+              {% include "result/_responses.html" with responses=response.responses question=response.question %}
+            </li>
+          {% endfor %}
+        </ol>
+        <ol>
+          {% for child in data.childs %}
+            <li>
+              {{ child.topic.title|title }}
+            </li>
+            <ol>
+              {% for response in child.responses %}
+                <li>
+                  <p>{{ response.question.text }}</p>
+                  {% include "result/_responses.html" with responses=response.responses question=response.question %}
+                </li>
+              {% endfor %}
+            </ol>
+          {% endfor %}
+        </ol>
+      {% endfor %}
+    </ol>
+  </div>
+</div>
+{% endblock %}

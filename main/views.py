@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from account.models import Respondent
 from main.models import (
     Questionnaire, Recommendation, Question, Response, Option, Measure,
-    EssayResponse, ObjectiveResponse, GroupOfObjectiveResponse)
+    EssayResponse, ObjectiveResponse, GroupOfObjectiveResponse, Topic)
 
 
 @login_required
@@ -105,3 +105,54 @@ def questionnaire_submit(request, pk):
         )
 
     return redirect('main:questionnaire_list')
+
+
+@login_required
+def questionnaire_responses(request, pk):
+    questionnaire = Questionnaire.objects.get(pk=pk)
+
+    topics = []
+    parent = questionnaire.topic_set.filter(parent=None)
+    for topic in parent:
+        responses = []
+        for question in topic.question_set.all():
+            responses.append({
+                'question': question,
+                'responses': Response.objects.filter(
+                    question=question).order_by('-respondent')
+            })
+
+        childs = questionnaire.topic_set.filter(parent=topic)
+        child_responses = []
+        for topic in childs:
+            resps = []
+            for question in topic.question_set.all():
+                resps.append({
+                    'question': question,
+                    'responses': Response.objects.filter(
+                        question=question).order_by('respondent')
+                })
+            child_responses.append({
+                'topic': topic,
+                'responses': resps
+            })
+
+        topics.append({
+            'parent': {
+                'topic': topic,
+                'responses': responses
+            },
+            'childs': child_responses,
+        })
+
+    questions = Question.objects.filter(topic__questionnaire=questionnaire)
+    num_of_responses = Response.objects.filter(
+            question__in=questions
+        ).values('respondent').distinct().count()
+
+    context = {
+        'questionnaire': questionnaire,
+        'topics': topics,
+        'num_of_responses': num_of_responses
+    }
+    return render(request, 'result/questionnaires.html', context)
