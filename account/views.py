@@ -4,7 +4,7 @@ from account.forms import RespondentCreationForm, RespondentChangeForm
 from account.models import Respondent
 
 
-def register(request):
+def signin(request):
     if request.method == 'POST':
         form = RespondentCreationForm(request.POST)
         if form.is_valid():
@@ -12,7 +12,7 @@ def register(request):
             return redirect('account:login')
     else:
         form = RespondentCreationForm()
-    return render(request, 'account/register.html', {'form': form})
+    return render(request, 'account/signin_form.html', {'form': form})
 
 
 def edit(request, username):
@@ -24,4 +24,4 @@ def edit(request, username):
             return redirect('main:index')
     else:
         form = RespondentChangeForm(instance=respondent)
-    return render(request, 'account/edit.html', {'form': form})
+    return render(request, 'account/profile_form.html', {'form': form})

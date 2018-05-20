@@ -4,24 +4,25 @@ from django.shortcuts import render, redirect
 from account.models import Respondent
 from main.models import (
     Questionnaire, Recommendation, Question, Response, Option, Measure,
-    EssayResponse, ObjectiveResponse, GroupOfObjectiveResponse, Topic)
+    EssayResponse, ObjectiveResponse, GroupOfObjectiveResponse, Topic, Diklat)
 
 
 @login_required
 def questionnaire_list(request):
-    respondent = request.user.respondent
-    responses = Response.objects.filter(respondent=respondent)
-    questionnaires = Questionnaire.objects.all()
+    questionnaires = Questionnaire.objects.filter(status='publish')
+    diklats = Diklat.objects.filter(regencies=request.user.respondent.regency)
+    if hasattr(request.GET, 'diklat') and request.GET.diklat:
+        questionnaires.filter(diklat=request.GET.diklat)
 
-    if responses.exists():
-        submitted = set(
-            resp.question.topic.questionnaire.id for resp in responses)
-        questionnaires = Questionnaire.objects.all().exclude(id__in=submitted)
+    ctx = {
+        'diklats': diklats,
+        'questionnaires': questionnaires,
+    }
 
     return render(
         request,
-        'main/questionnaire_list.html',
-        {'questionnaires': questionnaires},
+        'main/questionnaires.html',
+        ctx,
     )
 
 

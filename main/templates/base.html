@@ -9,14 +9,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'bootstrap-4.1.1/dist/css/bootstrap.min.css' %}">
 
-    <!-- Custom css -->
-    <link rel="stylesheet" href="{% static 'css/global.css' %}">
-
     {% block header %}{% endblock %}
 
   </head>
-  <body>
-    {% include "header.html" %}
+  <body class="bg-light text-dark">
 
     {% block content %}{% endblock %}
 

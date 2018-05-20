@@ -144,21 +144,6 @@ class RespondentAdmin(BaseAccountAdmin):
 class RegionalAdminAdmin(BaseAccountAdmin):
     form = RegionalAdminChangeForm
     add_form = RegionalAdminCreationForm
-    autocomplete_fields = ('region', )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.list_display = self.list_display + ('region', )
-        self.search_fields = self.search_fields + ['region__name']
-
-    def has_add_permission(self, request):
-        return request.user.is_superuser
-
-    def has_change_permission(self, request, obj=None):
-        return request.user.is_superuser or obj == request.user.regionaladmin
-
-    def has_delete_permission(self, request, obj=None):
-        return request.user.is_superuser
 
 
 admin.site.register(RegionalAdmin, RegionalAdminAdmin)

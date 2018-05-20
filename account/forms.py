@@ -50,8 +50,8 @@ class RespondentCreationForm(forms.ModelForm):
     class Meta:
         model = Respondent
         fields = ['username', 'password1', 'password2', 'first_name',
-                  'last_name', 'gender', 'age', 'last_education', 'workplace',
-                  'position', 'year_of_service']
+                  'last_name', 'gender', 'age', 'province', 'regency',
+                  'last_education', 'workplace', 'position', 'year_of_service']
         field_classes = {'username': CustomUsernameField}
 
     def clean_password2(self):
@@ -108,8 +108,8 @@ class RespondentChangeForm(forms.ModelForm):
     class Meta:
         model = Respondent
         fields = ['username', 'password', 'first_name', 'last_name', 'gender',
-                  'age', 'last_education', 'workplace', 'position',
-                  'year_of_service']
+                  'age', 'province', 'regency', 'last_education', 'workplace',
+                  'position', 'year_of_service']
         field_classes = {'username': CustomUsernameField}
 
     def __init__(self, *args, **kwargs):

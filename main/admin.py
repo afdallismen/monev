@@ -20,8 +20,8 @@ class MainAdminSite(AdminSite):
 class DiklatAdmin(admin.ModelAdmin):
     autocomplete_fields = ['province', 'regencies']
     search_fields = ['title']
-    list_display = ('__str__', 'date', 'duration_display',
-                    'num_of_participant', 'supervisor', 'location')
+    list_display = ('__str__', 'date', 'duration_display', 'supervisor',
+                    'location')
     list_filter = [
         ('province', admin.RelatedOnlyFieldListFilter),
         ('regencies', admin.RelatedOnlyFieldListFilter),

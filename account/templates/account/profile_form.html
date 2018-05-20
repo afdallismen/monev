@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../main/static/bootstrap-4.1.1/dist/css/bootstrap.min.css">
+
+  </head>
+  <body class="bg-light text-dark">
+    <div class="container border mt-5 bg-white">
+      <nav class="navbar navbar-expand-md navbar-white border-bottom mb-5">
+        <a class="navbar-brand font-weight-bold text-muted" href="#">Monitoring dan Evaluasi Diklat</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Questionnaires</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Edit Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="px-5">
+        <p class="text-danger">
+          Username or password mismatch.
+        </p>
+        <form>
+          <div class="row">
+            <div class="col-sm-6">
+              <fieldset class="mb-3">
+                <h5 class="text-muted">Login detail</h5>
+                <div class="pl-2">
+                  <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" autofocus>
+                  </div>
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control">
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="col-sm-6">
+              <fieldset class="mb-3">
+                <h5 class="text-muted">Personal Information</h5>
+                <div class="pl-2">
+                  <div class="form-group">
+                    <label>First name</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Last name</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Age</label>
+                    <input type="number" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Gender</label>
+                    <select id="inputState" class="form-control">
+                      <option>Male</option>
+                      <option>Female</option>
+                    </select>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <fieldset class="mb-3">
+            <h5 class="text-muted">Work Related</h5>
+            <div class="pl-2">
+              <div class="form-row">
+                <div class="form-group col">
+                  <label>Workplace</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="form-group col">
+                  <label>Region</label>
+                  <select id="inputState" class="form-control">
+                    <option>Aceh</option>
+                    <option>Sumatera Utara</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Position</label>
+                <input type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Year of service</label>
+                <input type="number" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Last education</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+          </fieldset>
+          <div class="text-right">
+            <button type="submit" class="btn btn-block btn-primary rounded-0">Save</button>
+          </div>
+        </form>
+      </div>
+      <footer class="footer border-top py-1 mt-5">
+        <small class="text-muted my-0">&copy; 2018 by PAM-Techno</small>
+      </footer>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../main/static/js/jquery-3.3.1.min.js"></script>
+    <script src="../main/static/js/popper.js"></script>
+    <script src="../main/static/bootstrap-4.1.1/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

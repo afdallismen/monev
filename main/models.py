@@ -18,10 +18,9 @@ class Diklat(models.Model):
     location = models.CharField(_("location"), max_length=200)
     duration = models.PositiveSmallIntegerField(_("duration"))
     supervisor = models.CharField(_("supervisor"), max_length=200)
-    num_of_participant = models.PositiveSmallIntegerField(
-        _("num of participant"))
 
     class Meta:
+        ordering = ['date']
         verbose_name = _("diklat")
         verbose_name_plural = _("diklat")
 
@@ -37,6 +36,10 @@ class Questionnaire(models.Model):
         ('instrument_d', _("Instrument D")),
         ('instrument_e', _("Instrument E")),
     )
+    STATUS_CHOICES = (
+        ('draft', _("Draft")),
+        ('publish', _("Publish")),
+    )
 
     diklat = models.ForeignKey(
         Diklat,
@@ -49,8 +52,14 @@ class Questionnaire(models.Model):
         max_length=12,
         choices=INSTRUMENT_CHOICES,
     )
+    status = models.CharField(
+        _("status"),
+        max_length=7,
+        choices=STATUS_CHOICES,
+    )
 
     class Meta:
+        ordering = ['diklat__date']
         unique_together = ('diklat', 'instrument')
         verbose_name = _("questionnaire")
         verbose_name_plural = _("questionnaires")

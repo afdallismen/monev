@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+  <link rel="stylesheet" href="{% static 'css/login_form.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="container h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-sm-6 border pt-3 pb-4 px-4 bg-white text-dark">
+        <div class="mb-4">
+          <h3 class="text-primary mb-1"><b>Login</b></h3>
+          <span class="text-muted">Monitoring dan Evaluasi Diklat</span>
+          <hr />
+        </div>
+
+        {% if form.errors %}
+          <p class="text-danger">
+            Username or password mismatch.
+          </p>
+        {% endif %}
+
+        <form method="post" action="{% url 'account:login' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Username" name="username" id="id_username" required autofocus>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" name="password" id="id_password" required>
+          </div>
+          <input type="hidden" name="next" value="{{ next }}" />
+          <div class="text-center">
+            <hr />
+            <button type="submit" class="btn btn-success rounded-0">Login</button>
+            <a class="btn btn-primary rounded-0" href="{% url 'account:signin' %}" role="button">Sign-in</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

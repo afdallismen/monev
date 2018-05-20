@@ -9,12 +9,12 @@ urlpatterns = [
     path(
         'login/',
         auth_views.LoginView.as_view(
-            template_name='account/login.html',
+            template_name='account/login_form.html',
             redirect_authenticated_user=True,
         ),
         name="login",
     ),
     path('logout/', auth_views.LogoutView.as_view(), name="logout"),
-    path('register/', account_views.register, name="register"),
-    # path('<string:username>/edit', account_views.edit, name="edit"),
+    path('signin/', account_views.signin, name="signin"),
+    path('<str:username>/edit', account_views.edit, name="edit"),
 ]

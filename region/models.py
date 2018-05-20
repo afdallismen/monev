@@ -1,26 +1,26 @@
 from django.db import models
 
 
-class Province(models.Model):
+class BaseRegion(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
-        ordering = ['-id']
+        abstract = True
+        ordering = ['name']
+
+    def __str__(self):
+        return str(self.name)
+
+
+class Province(BaseRegion):
+    class Meta(BaseRegion.Meta):
         verbose_name = "province"
         verbose_name_plural = "provinces"
 
-    def __str__(self):
-        return str(self.name)
 
-
-class Regency(models.Model):
+class Regency(BaseRegion):
     province = models.ForeignKey(Province, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
 
-    class Meta:
-        ordering = ['-id']
+    class Meta(BaseRegion.Meta):
         verbose_name = "regency"
         verbose_name_plural = "regencies"
-
-    def __str__(self):
-        return str(self.name)

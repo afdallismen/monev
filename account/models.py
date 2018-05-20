@@ -6,7 +6,7 @@ from django.core.exceptions import (
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from region.models import Province
+from region.models import Province, Regency
 
 
 class User(AbstractUser):
@@ -43,7 +43,7 @@ class BaseAccount(models.Model):
         abstract = True
 
     def __str__(self):
-        return str(self.user.get_full_name()).title()
+        return self.user.get_full_name().title()
 
 
 class RegionalAdmin(BaseAccount):
@@ -79,6 +79,18 @@ class Respondent(BaseAccount):
     workplace = models.CharField(
         _("workplace"),
         max_length=100,
+        blank=True,
+        null=True,
+    )
+    province = models.ForeignKey(
+        Province,
+        on_delete=models.CASCADE,
+        verbose_name=_("province"),
+    )
+    regency = models.ForeignKey(
+        Regency,
+        on_delete=models.CASCADE,
+        verbose_name=_("regency"),
         blank=True,
         null=True,
     )

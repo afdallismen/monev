@@ -1,0 +1,34 @@
+{% extends 'main/dashboard.html' %}
+{% load static %}
+
+{% block dashboard_content %}
+  <p class="pl-1 text-muted">You can select a diklat and have a list of questionnaires from that diklat.</p>
+  <form class="form-inline mb-5" method="get" action="{% url 'main:questionnaire_list' %}">
+    <div class="form-group mr-2">
+      <select class="form-control" name="diklat" {% if not diklats %}disabled{% endif %}>
+        <option>{% if diklats %}Choose a diklat...{% else %}No available diklat yet.{% endif %}</option>
+        {% for diklat in diklats %}
+        <option value="{{ diklat.id }}">{{ diklat.title|truncatechars:100 }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success" {% if not diklats %}disabled{% endif %}>Go</button>
+  </form>
+  <p class="font-weight-bold text-muted">Available questionnaires :</p>
+  {% for questionnaire in questionnaires %}
+  <div class="row px-2 pt-2">
+    <div class="col">
+      <a href="#">{{ questionnaire.title|truncatechars:100 }}</a>
+    </div>
+    <div class="col-sm-auto">
+      <span class="text-right text-muted">{{ questionnaire.get_instrument_display }}</span>
+    </div>
+    <div class="col-sm-auto">
+      <span class="text-right text-muted">{{ questionnaire.diklat.date }}</span>
+    </div>
+  </div>
+  <hr class="my-0"/>
+  {% empty %}
+    <p class="text-warning">No available questionnaire yet.</p>
+  {% endfor %}
+{% endblock %}

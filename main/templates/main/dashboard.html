@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container border mt-5 bg-white">
+    {% include 'main/header.html' %}
+
+    {% block dashboard_content %}{% endblock %}
+
+    {% include 'main/footer.html' %}
+  </div>
+{% endblock %}
