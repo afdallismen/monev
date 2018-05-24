@@ -1,15 +1,27 @@
+{% load static %}
+
 <nav class="navbar navbar-expand-lg navbar-white border-bottom mb-5">
-  <a class="navbar-brand font-weight-bold text-muted" href="{% url 'main:index' %}">Monitoring dan Evaluasi Diklat</a>
+  <a class="navbar-brand text-muted" href="{% url 'main:index' %}">
+    <div class="row">
+      <div class="col-sm-auto">
+        <img src="{% static 'image/logo_kemensos.png' %}" width="80">
+      </div>
+      <div class="col border-left text-muted">
+        <span>SISTEM MONITORING DAN EVALUASI ELEKTRONIK</span><br />
+        <span>ALUMNI DIKLAT BBPPKS PADANG</span>
+      </div>
+    </div>
+  </a>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'main:questionnaire_list' %}">Questionnaires</a>
+        <a class="nav-link" href="{% url 'main:questionnaire_list' %}">Kuesioner</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'account:edit' %}">Edit Profile</a>
+        <a class="nav-link" href="{% url 'account:edit' %}">Edit Profil</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'account:logout' %}">Logout</a>
+        <a class="nav-link" href="{% url 'account:logout' %}">Keluar</a>
       </li>
     </ul>
   </div>

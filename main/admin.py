@@ -45,6 +45,7 @@ class DiklatAdmin(admin.ModelAdmin):
             '<a href="{}">Participants</a>',
             url + "?q={!s}".format(q),
         )
+    participants.short_description = _("participants")
 
     def has_add_permission(self, request):
         return request.user.is_superuser
@@ -99,12 +100,14 @@ class QuestionnaireAdmin(nested_admin.NestedModelAdmin):
             '<a href="{}">Respondents</a>',
             url + "?q={!s}".format(q),
         )
+    respondents.short_description = _("respondents")
 
     def responses(self, obj):
         return format_html(
             "<a href='{}' target='blank'>Responses</a>",
             reverse('main:questionnaire_responses', kwargs={'pk': obj.pk})
         )
+    responses.short_description = _("user responses")
 
     def chart(self, obj):
         return format_html(
@@ -112,6 +115,7 @@ class QuestionnaireAdmin(nested_admin.NestedModelAdmin):
             reverse(
                 'main:questionnaire_responses_chart', kwargs={'pk': obj.pk})
         )
+    chart.short_description = _("user responses in chart")
 
 
 def question_display(obj):
@@ -184,9 +188,9 @@ admin.site.site_url = None
 admin.site.register(Diklat, DiklatAdmin)
 admin.site.register(Questionnaire, QuestionnaireAdmin)
 admin.site.register(Recommendation, RecommendationAdmin)
-admin.site.register(Response, ResponseAdmin)
+# admin.site.register(Response, ResponseAdmin)
 
-models = [EssayResponse, ObjectiveResponse, GroupOfObjectiveResponse]
-
-for model in models:
-    admin.site.register(model, BasicAdmin)
+# models = [EssayResponse, ObjectiveResponse, GroupOfObjectiveResponse]
+#
+# for model in models:
+#     admin.site.register(model, BasicAdmin)

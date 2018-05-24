@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-08 12:02+0700\n"
+"POT-Creation-Date: 2018-05-25 05:29+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,21 +18,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: .\account\admin.py:54
+#: .\account\admin.py:55
 #, python-format
 msgid "%(name)s object with primary key %(key)r does not exist."
 msgstr "%(name)s dengan primary key %(key)r tidak ditemukan."
 
-#: .\account\admin.py:68
+#: .\account\admin.py:69
 msgid "Password changed successfully."
 msgstr "Sandi berhasil diubah."
 
-#: .\account\admin.py:89
+#: .\account\admin.py:90
 #, python-format
 msgid "Change password: %s"
 msgstr "Ganti sandi: %s"
 
-#: .\account\admin.py:134
+#: .\account\admin.py:135
 msgid "is active"
 msgstr "akun aktif"
 
@@ -40,19 +40,23 @@ msgstr "akun aktif"
 msgid "account"
 msgstr "akun"
 
-#: .\account\forms.py:21 .\account\forms.py:135
+#: .\account\forms.py:31 .\account\forms.py:147
 msgid "The two password fields didn't match."
 msgstr "Sandi yang anda masukan tidak cocok."
 
-#: .\account\forms.py:31
+#: .\account\forms.py:35
+msgid "Password"
+msgstr "Sandi"
+
+#: .\account\forms.py:41
 msgid "Password confirmation"
 msgstr "Konfirmasi sandi"
 
-#: .\account\forms.py:34 .\account\forms.py:148
+#: .\account\forms.py:44 .\account\forms.py:160
 msgid "Enter the same password as before, for verification."
 msgstr "Masukan sandi yang sama seperti sebelumnya, untuk konfirmasi."
 
-#: .\account\forms.py:88 .\account\forms.py:203
+#: .\account\forms.py:99 .\account\forms.py:215
 msgid ""
 "Raw passwords are not stored, so there is no way to see this user's "
 "password, but you can change the password using <a href=\"{}\">this form</a>."
@@ -104,26 +108,34 @@ msgstr "umur"
 msgid "workplace"
 msgstr "unit kerja lembaga/organisasi"
 
-#: .\account\models.py:86
+#: .\account\models.py:88
+msgid "province"
+msgstr "provinsi"
+
+#: .\account\models.py:93
+msgid "regency"
+msgstr "kota/kabupaten"
+
+#: .\account\models.py:98
 msgid "position"
 msgstr "jabatan"
 
-#: .\account\models.py:92
+#: .\account\models.py:104
 msgid "year of service"
 msgstr "masa/lama kerja"
 
-#: .\account\models.py:97
+#: .\account\models.py:109
 msgid "last education"
 msgstr "pendidikan terakhir"
 
-#: .\account\models.py:106
+#: .\account\models.py:118
 msgid "User already registered as a RegionalAdmin."
 msgstr "Pengguna telah terdaftar sebagai admin wilayah"
 
-#: .\account\models.py:110
+#: .\account\models.py:122
 msgid "respondent"
 msgstr "responden"
 
-#: .\account\models.py:111
+#: .\account\models.py:123
 msgid "respondents"
 msgstr "responden"

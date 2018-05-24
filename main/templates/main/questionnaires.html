@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block dashboard_content %}
-  <p class="pl-1 text-muted">You can select a diklat and have a list of questionnaires from that diklat.</p>
+  <p class="pl-1 text-muted">Tampilkan hanya kuesioner yang ada pada diklat yang anda pilih.</p>
   <form class="form-inline mb-5" method="get" action="{% url 'main:questionnaire_list' %}">
     <div class="form-group mr-2">
       <select class="form-control" name="diklat" {% if not diklats %}disabled{% endif %}>
-        <option value="">{% if diklats %}Choose a diklat...{% else %}No available diklat yet.{% endif %}</option>
+        <option value="">{% if diklats %}Pilih diklat...{% else %}Belum ada diklat yang tersedia.{% endif %}</option>
         {% for diklat in diklats %}
         <option value="{{ diklat.id }}" {% if diklat.id == selected %}selected{% endif %}>{{ diklat.title|truncatechars:100 }}</option>
         {% endfor %}
@@ -17,13 +17,13 @@
   <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
     {% if questionnaires.submitted %}
     <li class="nav-item">
-      <a class="nav-link active" data-toggle="pill" href="#all-questionnaire" role="tab" selected>All</a>
+      <a class="nav-link active" data-toggle="pill" href="#all-questionnaire" role="tab" selected>Semua</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="pill" href="#unsubmitted-questionnaire" role="tab">Unsubmitted</a>
+      <a class="nav-link" data-toggle="pill" href="#unsubmitted-questionnaire" role="tab">Belum dijawab</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="pill" href="#submitted-questionnaire" role="tab">Submitted</a>
+      <a class="nav-link" data-toggle="pill" href="#submitted-questionnaire" role="tab">Sudah dijawab</a>
     </li>
     {% endif %}
   </ul>
@@ -43,7 +43,7 @@
         </div>
         <hr class="my-0"/>
       {% empty %}
-        <p class="px-2 text-warning">No available questionnaire yet.</p>
+        <p class="px-2 text-warning">Belum ada kuesioner yang tersedia.</p>
       {% endfor %}
     </div>
     <div class="tab-pane fade" id="unsubmitted-questionnaire" role="tabpanel">
@@ -61,7 +61,7 @@
         </div>
         <hr class="my-0"/>
       {% empty %}
-        <p class="px-2 text-warning">All available questionnaire has been submitted.</p>
+        <p class="px-2 text-warning">Semua kuesioner yang tersedia telah anda jawab.</p>
       {% endfor %}
     </div>
     <div class="tab-pane fade" id="submitted-questionnaire" role="tabpanel">

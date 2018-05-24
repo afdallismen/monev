@@ -13,16 +13,16 @@
       <div class="row">
         <div class="col-sm-6">
           <fieldset class="mb-3">
-            <h5 class="text-muted">Login detail</h5>
+            <h5 class="text-muted">Autentikasi Situs</h5>
             <div class="pl-2">
               <div class="form-group">
-                <label for="{{form.username.id_for_label}}">Username</label>
+                <label for="{{form.username.id_for_label}}">Nama Pengguna</label>
                 <input
                   type="text"
                   class="form-control"
                   name="{{form.username.name}}"
                   id="{{form.username.id_for_label}}"
-                  value="{{form.username.value}}"
+                  value="{{form.username.value|default:''}}"
                   required
                   autofocus
                 >
@@ -32,7 +32,7 @@
                 >{{form.username.help_text|safe}}</small>
               </div>
               <div class="form-group">
-                <label for="{{form.password.id_for_label}}">Password</label>
+                <label for="{{form.password.id_for_label}}">Sandi</label>
                 <input
                   type="password"
                   class="form-control"
@@ -51,16 +51,16 @@
         </div>
         <div class="col-sm-6">
           <fieldset class="mb-3">
-            <h5 class="text-muted">Personal Information</h5>
+            <h5 class="text-muted">Informasi Pribadi</h5>
             <div class="pl-2">
               <div class="form-group">
-                <label for="{{form.first_name.id_for_label}}">First name</label>
+                <label for="{{form.first_name.id_for_label}}">Nama depan</label>
                 <input
                   type="text"
                   class="form-control"
                   name="{{form.first_name.name}}"
                   id="{{form.first_name.id_for_label}}"
-                  value="{{form.first_name.value}}"
+                  value="{{form.first_name.value|default:''}}"
                   required
                 >
                 <small
@@ -69,13 +69,13 @@
                 >{{form.first_name.help_text|safe}}</small>
               </div>
               <div class="form-group">
-                <label for="{{form.last_name.id_for_label}}">Last name</label>
+                <label for="{{form.last_name.id_for_label}}">Nama belakang</label>
                 <input
                   type="text"
                   class="form-control"
                   name="{{form.last_name.name}}"
                   id="{{form.last_name.id_for_label}}"
-                  value="{{form.last_name.value}}"
+                  value="{{form.last_name.value|default:''}}"
                 >
                 <small
                   id="{{form.last_name.id_for_label}}helptext"
@@ -83,7 +83,7 @@
                 >{{form.last_name.help_text|safe}}</small>
               </div>
               <div class="form-group">
-                <label for="{{form.age.id_for_label}}">Age</label>
+                <label for="{{form.age.id_for_label}}">Umur</label>
                 <input
                   type="number"
                   class="form-control"
@@ -98,7 +98,7 @@
                 >{{form.age.help_text|safe}}</small>
               </div>
               <div class="form-group">
-                <label for="{{form.gender.id_for_label}}">Gender</label>
+                <label for="{{form.gender.id_for_label}}">Jenis kelamin</label>
                 <select class="form-control" name="{{form.gender.name}}" id="{{form.gender.id_for_label}}">
                   {% for key, val in form.fields.gender.choices %}
                   <option value={{key}} {% if key == form.gender.value %}selected{% endif %} required>{{val}}</option>
@@ -110,17 +110,17 @@
         </div>
       </div>
       <fieldset class="mb-3">
-        <h5 class="text-muted">Work Related</h5>
+        <h5 class="text-muted">Pekerjaan</h5>
         <div class="pl-2">
           <div class="form-row">
             <div class="form-group col">
-              <label for="{{form.workplace.id_for_label}}">Workplace</label>
+              <label for="{{form.workplace.id_for_label}}">Unit Kerja Lembaga/Organisasi</label>
               <input
                 type="text"
                 class="form-control"
                 name="{{form.workplace.name}}"
                 id="{{form.workplace.id_for_label}}"
-                value="{{form.workplace.value}}"
+                value="{{form.workplace.value|default:''}}"
                 required
               >
               <small
@@ -129,7 +129,7 @@
               >{{form.workplace.help_text|safe}}</small>
             </div>
             <div class="form-group col">
-              <label for="{{form.province.id_for_label}}">Province</label>
+              <label for="{{form.province.id_for_label}}">Provinsi</label>
               <select class="form-control" name="{{form.province.name}}" id="{{form.province.id_for_label}}" required>
                 {% for key, val in form.fields.province.choices %}
                 <option value={{key}} {% if key == form.province.value %}selected{% endif %} required>{{val}}</option>
@@ -137,7 +137,7 @@
               </select>
             </div>
             <div class="form-group col">
-              <label for="{{form.regency.id_for_label}}">Regency</label>
+              <label for="{{form.regency.id_for_label}}">Kota/Kabupaten</label>
               <select class="form-control" name="{{form.regency.name}}" id="{{form.regency.id_for_label}}" required>
                 {% for key, val in form.fields.regency.choices %}
                 <option value={{key}} {% if key == form.regency.value %}selected{% endif %} required>{{val}}</option>
@@ -146,13 +146,13 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="{{form.position.id_for_label}}">Position</label>
+            <label for="{{form.position.id_for_label}}">Jabatan</label>
             <input
               type="text"
               class="form-control"
               name="{{form.position.name}}"
               id="{{form.position.id_for_label}}"
-              value="{{form.position.value}}"
+              value="{{form.position.value|default:''}}"
               required
             >
             <small
@@ -161,7 +161,7 @@
             >{{form.position.help_text|safe}}</small>
           </div>
           <div class="form-group">
-            <label for="{{form.year_of_service.id_for_label}}">Year of service</label>
+            <label for="{{form.year_of_service.id_for_label}}">Masa/Lama kerja</label>
             <input
               type="number"
               class="form-control"
@@ -176,13 +176,13 @@
             >{{form.year_of_service.help_text|safe}}</small>
           </div>
           <div class="form-group">
-            <label for="{{form.last_education.id_for_label}}">Last education</label>
+            <label for="{{form.last_education.id_for_label}}">Pendidikan terakhir</label>
             <input
               type="text"
               class="form-control"
               name="{{form.last_education.name}}"
               id="{{form.last_education.id_for_label}}"
-              value="{{form.last_education.value}}"
+              value="{{form.last_education.value|default:''}}"
               required
             >
             <small
@@ -194,7 +194,7 @@
       </fieldset>
       <div class="text-right">
         <input type="hidden" name="is_active" value="{{ True }}" />
-        <button type="submit" class="btn btn-block btn-primary rounded-0">Save</button>
+        <button type="submit" class="btn btn-block btn-primary rounded-0">Simpan</button>
       </div>
     </form>
   </div>
