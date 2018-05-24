@@ -22,6 +22,7 @@ from account.forms import (
     RespondentCreationForm, RespondentChangeForm, RegionalAdminCreationForm,
     RegionalAdminChangeForm
 )
+from region.models import Regency
 
 
 User = get_user_model()
@@ -139,11 +140,40 @@ class BaseAccountAdmin(admin.ModelAdmin):
 class RespondentAdmin(BaseAccountAdmin):
     form = RespondentChangeForm
     add_form = RespondentCreationForm
+    list_filter = (
+        ('province', admin.RelatedOnlyFieldListFilter),
+        ('regency', admin.RelatedOnlyFieldListFilter),
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.list_display = self.list_display + ('province', 'regency')
+
+    def get_search_results(self, request, queryset, search_term):
+        queryset, use_distinct = super().get_search_results(
+            request, queryset, search_term)
+        if "," in search_term:
+            regencies = search_term.split(",")
+            queryset = Respondent.objects.filter(
+                regency__name__in=regencies
+            )
+        elif Regency.objects.filter(name=search_term).exists():
+            queryset = Respondent.objects.filter(
+                regency__name=search_term
+            )
+        return queryset, use_distinct
 
 
 class RegionalAdminAdmin(BaseAccountAdmin):
     form = RegionalAdminChangeForm
     add_form = RegionalAdminCreationForm
+    list_filter = (('region', admin.RelatedOnlyFieldListFilter), )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.list_display = self.list_display + ('region', )
 
 
 admin.site.register(RegionalAdmin, RegionalAdminAdmin)

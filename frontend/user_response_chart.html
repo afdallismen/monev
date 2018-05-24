@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+  <style>
+    .wrapper {
+      padding: 100px;
+    }
+  </style>
+  <style type="text/css" media="print">
+    @page {
+      size: landscape;
+      margin: 0mm;
+    }
+    @media print {
+      .page-break {page-break-before: always;}
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="wrapper">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-5">
+          <canvas id="canvas" class="border pt-2" height="350"></canvas>
+        </div>
+        <div class="col-sm-6">
+          <p>Keterangan</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block costum_js %}
+  <script>
+    var barChartData = {
+      labels: ['Permasalahan', 'Pemecahan Masalah', 'Analisis Pelaksanaan Tugas', 'Kerjasama', 'Evaluasi Kegiatan'],
+      datasets: [{
+        label: 'Dataset 1',
+        backgroundColor: 'rgb(255, 99, 132)',
+        data: [50, 25, 25, 30, 10]
+      }, {
+        label: 'Dataset 2',
+        backgroundColor: 'rgb(54, 162, 235)',
+        data: [50, 0, 50, 30, 90]
+      }, {
+        label: 'Dataset 3',
+        backgroundColor: 'rgb(255, 159, 64)',
+        data: [50, 25, 50, 30, 0]
+      }, {
+        label: 'Dataset 4',
+        backgroundColor: 'rgb(255, 99, 132)',
+        data: [25, 50, 25, 30, 0]
+      }]
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('canvas').getContext('2d');
+      window.myBar = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+          legend: {
+            display: true,
+            position: 'right'
+          },
+          responsive: true,
+          scales: {
+            xAxes: [{
+              stacked: true,
+              ticks: {
+                autoSkip: false,
+                maxRotation: 90,
+                minRotation: 90
+              }
+            }],
+            yAxes: [{
+              stacked: true,
+              ticks: {
+                min: 0,
+                max: 100,
+                callback: function(value) {
+                  return value + "%"
+                }
+              },
+              scaleLabel: {
+                display: true,
+                labelString: "Percentage"
+              }
+            }]
+          }
+        }
+      });
+    };
+  </script>
+  <script src="../main/static/js/Chart.min.js"></script>
+{% endblock %}

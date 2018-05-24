@@ -14,7 +14,7 @@ class Diklat(models.Model):
         verbose_name=_("province"),
     )
     regencies = models.ManyToManyField(Regency, verbose_name=_("regencies"))
-    date = models.DateTimeField(_("date"))
+    date = models.DateField(_("date"))
     location = models.CharField(_("location"), max_length=200)
     duration = models.PositiveSmallIntegerField(_("duration"))
     supervisor = models.CharField(_("supervisor"), max_length=200)
@@ -66,6 +66,12 @@ class Questionnaire(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+    def has_answer(self, respondent):
+        return Response.objects.filter(
+            respondent=respondent,
+            question__topic__questionnaire=self,
+        ).exists()
 
 
 class Topic(models.Model):

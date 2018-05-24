@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+  <style>
+    .wrapper {
+      padding: 100px;
+    }
+  </style>
+  <style type="text/css" media="print">
+    @page {
+      size: landscape;
+      margin: 0mm;
+    }
+    @media print {
+      .page-break-before {page-break-before: always;}
+      .page-break-after {page-break-after: always;}
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="wrapper">
+    <div class="container-fluid">
+      {% for topic in data %}
+      <div class="row">
+        <div class="col-sm-12">
+          <h3 class="text-center mb-3">{{topic.title|upper}}</h3>
+          {% for question in topic.questions %}
+            {% for regency in question.regencies %}
+            <h4 class="text-center mb-4">{{regency|upper}}</h3>
+            <div class="row mb-5">
+              <div class="col-sm-5">
+                <canvas id="canvas-topic{{forloop.parentloop.parentloop.counter0}}-question{{forloop.parentloop.counter0}}-regency{{forloop.counter0}}" class="border pt-2" height="300"></canvas>
+              </div>
+              <div class="col-sm-6 offset-sm-1 pl-5">
+                <p>Keterangan</p>
+              </div>
+            </div>
+            {% endfor %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block costum_js %}
+  <script>
+    function titleCase(str) {
+      return str.split(' ').map(function(val){
+        return val.charAt(0).toUpperCase() + val.substr(1).toLowerCase();
+      }).join(' ');
+    }
+
+    function getRandomRgb() {
+      var num = Math.round(0xffffff * Math.random());
+      var r = num >> 16;
+      var g = num >> 8 & 255;
+      var b = num & 255;
+      return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+    }
+
+
+    var server_data = JSON.parse('{{json_data|safe}}');
+    console.log(server_data);
+    var chart_data = [];
+    for (var i=0; i < server_data.length; i++) {
+      for (var j=0; j < server_data[i].questions.length; j++) {
+        var options = server_data[i].questions[j].options;
+        var regencies = server_data[i].questions[j].regencies;
+        var results = server_data[i].questions[j].results;
+        var measures = [];
+        for (var l=0; l < results.length; l++) {
+          measures.push(results[l].measure);
+        }
+
+        var labels = measures
+        for (var k=0; k < regencies.length; k++) {
+          var canvas = `canvas-topic${i}-question${j}-regency${k}`;
+          var datasets = [];
+          var totals = [];
+          for (var p=0; p < results.length; p++) {
+            var total = 0;
+            for (var q=0+(k*options.length); q < options.length + (k*options.length); q++) {
+              total+=results[p].counts[q];
+            }
+            totals.push(total);
+          }
+          console.log(totals)
+          for (var m=0; m < options.length; m++) {
+            var dataset = {
+              label: options[m][0],
+              backgroundColor: getRandomRgb(),
+              data: []
+            }
+            for (var n=0; n < results.length; n++) {
+              dataset.data.push((results[n].counts[m+(k*options.length)] / totals[n]) * 100)
+            }
+            datasets.push(dataset)
+          }
+          chart_data.push({
+            canvas: canvas,
+            data: {
+              labels: labels,
+              datasets: datasets
+            }
+          })
+        }
+      }
+    }
+    console.log(chart_data)
+    window.onload = function() {
+      for (var o=0; o < chart_data.length; o++) {
+        var ctx = document.getElementById(chart_data[o].canvas).getContext('2d');
+        window.myBar = new Chart(ctx, {
+          type: 'bar',
+          data: chart_data[o].data,
+          options: {
+            legend: {
+              display: true,
+              position: 'right'
+            },
+            responsive: true,
+            scales: {
+              xAxes: [{
+                stacked: true,
+                ticks: {
+                  autoSkip: false,
+                  maxRotation: 90,
+                  minRotation: 90
+                }
+              }],
+              yAxes: [{
+                stacked: true,
+                ticks: {
+                  min: 0,
+                  max: 100,
+                  callback: function(value) {
+                    return value + "%"
+                  }
+                },
+                scaleLabel: {
+                  display: true,
+                  labelString: "Percentage"
+                }
+              }]
+            }
+          }
+        });
+      }
+    };
+  </script>
+  <script src="{% static 'js/Chart.min.js' %}"></script>
+{% endblock %}

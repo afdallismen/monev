@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
@@ -11,12 +13,31 @@ from main.models import (
 def questionnaire_list(request):
     questionnaires = Questionnaire.objects.filter(status='publish')
     diklats = Diklat.objects.filter(regencies=request.user.respondent.regency)
-    if hasattr(request.GET, 'diklat') and request.GET.diklat:
-        questionnaires.filter(diklat=request.GET.diklat)
+    selected = False
+    if 'diklat' in request.GET and request.GET['diklat']:
+        selected = request.GET['diklat']
+        questionnaires.filter(diklat=selected)
+
+    submitted_questions = set(
+        request.user.respondent.response_set.values_list('question', flat=True)
+    )
+    submitted_questionnaire = Questionnaire.objects.filter(
+        topic__question__in=submitted_questions
+    ).distinct()
+    unsubmitted_questionnaire = Questionnaire.objects.exclude(
+        id__in=submitted_questionnaire
+    )
+
+    questionnaires = {
+        'all': questionnaires,
+        'submitted': submitted_questionnaire,
+        'unsubmitted': unsubmitted_questionnaire,
+    }
 
     ctx = {
         'diklats': diklats,
         'questionnaires': questionnaires,
+        'selected': int(selected),
     }
 
     return render(
@@ -31,23 +52,39 @@ def questionnaire_detail(request, pk):
     questionnaire = Questionnaire.objects.get(pk=pk)
     topics = []
     parent = questionnaire.topic_set.filter(parent=None)
+
     for topic in parent:
         childs = questionnaire.topic_set.filter(parent=topic)
         topics.append({'parent': topic, 'childs': childs})
 
+    ctx = {
+        'questionnaire': questionnaire,
+        'topics': topics,
+    }
+
+    print(ctx)
+
     return render(
         request,
-        "main/questionnaire_detail.html",
-        {
-            'questionnaire': questionnaire,
-            'topics': topics,
-        }
+        "main/questionnaire.html",
+        ctx,
     )
 
 
 @login_required
 def questionnaire_submit(request, pk):
     respondent = Respondent.objects.get(user=request.user)
+    questions = Question.objects.filter(
+        topic__in=Questionnaire.objects.get(pk=pk).topic_set.all())
+    responses = Response.objects.filter(
+        respondent=respondent, question__in=questions)
+    if responses:
+        for response in responses:
+            response.delete()
+        recs = Recommendation.objects.filter(
+            respondent=respondent, question__in=questions)
+        for rec in recs:
+            rec.delete()
     post_data = dict(request.POST)
     del post_data['csrfmiddlewaretoken']
     recommendations = {}
@@ -66,19 +103,18 @@ def questionnaire_submit(request, pk):
 
     if recommendations:
         for pk, val in recommendations.items():
-            obj, _ = Recommendation.objects.get_or_create(
+            Recommendation.objects.create(
                 respondent=respondent,
                 question=Question.objects.get(pk=pk),
+                text=val,
             )
-            obj.text = val
-            obj.save()
     for pk, val in essays.items():
         response = Response.objects.create(
             respondent=respondent,
             question=Question.objects.get(pk=pk),
             type=Question.objects.get(pk=pk).type,
         )
-        EssayResponse.objects.get_or_create(
+        EssayResponse.objects.create(
             response=response,
             text=val,
         )
@@ -88,7 +124,7 @@ def questionnaire_submit(request, pk):
             question=Question.objects.get(pk=pk),
             type=Question.objects.get(pk=pk).type,
         )
-        ObjectiveResponse.objects.get_or_create(
+        ObjectiveResponse.objects.create(
             response=response,
             selected=Option.objects.get(pk=val),
         )
@@ -99,7 +135,7 @@ def questionnaire_submit(request, pk):
             question=question,
             type=question.type,
         )
-        GroupOfObjectiveResponse.objects.get_or_create(
+        GroupOfObjectiveResponse.objects.create(
             response=response,
             measure=Measure.objects.get(pk=pk),
             selected=Option.objects.get(pk=val),
@@ -108,52 +144,68 @@ def questionnaire_submit(request, pk):
     return redirect('main:questionnaire_list')
 
 
+def get_responses(questionnaire):
+    questions = Question.objects.filter(
+        topic__questionnaire=questionnaire,
+        type='group_of_objective',
+    )
+    topics = Topic.objects.filter(question__in=questions)
+
+    data = []
+    for topic in topics:
+        questions = []
+        for question in topic.question_set.filter(type='group_of_objective'):
+            results = []
+            for measure in question.measure_set.all():
+                counts = []
+                for regency in questionnaire.diklat.regencies.all():
+                    for option in question.option_set.all():
+                        responses = Response.objects.filter(
+                            respondent__regency=regency,
+                            question=question,
+                        )
+                        counts.append(GroupOfObjectiveResponse.objects.filter(
+                            response__in=responses,
+                            measure=measure,
+                            selected=option,
+                        ).count())
+                results.append({
+                    'measure': measure.name,
+                    'counts': counts,
+                })
+            questions.append({
+                'regencies': list(questionnaire.diklat.regencies.values_list(
+                    'name', flat=True)),
+                'options': list(
+                    question.option_set.values_list('name', 'code')),
+                'results': results,
+            })
+        data.append({
+            'title': topic.title,
+            'questions': questions
+        })
+    return data
+
+
 @login_required
 def questionnaire_responses(request, pk):
     questionnaire = Questionnaire.objects.get(pk=pk)
+    data = get_responses(questionnaire)
 
-    topics = []
-    parent = questionnaire.topic_set.filter(parent=None)
-    for topic in parent:
-        responses = []
-        for question in topic.question_set.all():
-            responses.append({
-                'question': question,
-                'responses': Response.objects.filter(
-                    question=question).order_by('-respondent')
-            })
-
-        childs = questionnaire.topic_set.filter(parent=topic)
-        child_responses = []
-        for topic in childs:
-            resps = []
-            for question in topic.question_set.all():
-                resps.append({
-                    'question': question,
-                    'responses': Response.objects.filter(
-                        question=question).order_by('respondent')
-                })
-            child_responses.append({
-                'topic': topic,
-                'responses': resps
-            })
-
-        topics.append({
-            'parent': {
-                'topic': topic,
-                'responses': responses
-            },
-            'childs': child_responses,
-        })
-
-    questions = Question.objects.filter(topic__questionnaire=questionnaire)
-    num_of_responses = Response.objects.filter(
-            question__in=questions
-        ).values('respondent').distinct().count()
-
-    context = {
-        'questionnaire': questionnaire,
-        'topics': topics,
-        'num_of_responses': num_of_responses
+    ctx = {
+        'data': data
     }
-    return render(request, 'result/questionnaires.html', context)
+
+    return render(request, 'main/user_responses.html', ctx)
+
+
+@login_required
+def questionnaire_responses_chart(request, pk):
+    questionnaire = Questionnaire.objects.get(pk=pk)
+    data = get_responses(questionnaire)
+    print(data)
+    ctx = {
+        'data': data,
+        'json_data': json.dumps(data)
+    }
+    return render(request, 'main/user_responses_chart.html', ctx)

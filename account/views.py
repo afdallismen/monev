@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 
 from account.forms import RespondentCreationForm, RespondentChangeForm
-from account.models import Respondent
 
 
 def signin(request):
@@ -15,13 +14,15 @@ def signin(request):
     return render(request, 'account/signin_form.html', {'form': form})
 
 
-def edit(request, username):
-    respondent = Respondent.objects.get(user=request.user)
+def edit(request):
     if request.method == 'POST':
-        form = RespondentChangeForm(request.POST, instance=respondent)
+        form = RespondentChangeForm(
+            request.POST,
+            instance=request.user.respondent,
+        )
         if form.is_valid():
             form.save()
             return redirect('main:index')
     else:
-        form = RespondentChangeForm(instance=respondent)
+        form = RespondentChangeForm(instance=request.user.respondent)
     return render(request, 'account/profile_form.html', {'form': form})

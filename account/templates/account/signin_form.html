@@ -29,6 +29,7 @@
                   class="form-control"
                   name="{{form.username.name}}"
                   id="{{form.username.id_for_label}}"
+                  value="{{form.username.value}}"
                   required
                   autofocus
                 >
@@ -70,54 +71,61 @@
           <fieldset class="mb-3">
             <h5 class="text-muted">Personal Information</h5>
             <div class="pl-2">
-              <div class="form-group">
-                <label for="{{form.first_name.id_for_label}}">First name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="{{form.first_name.name}}"
-                  id="{{form.first_name.id_for_label}}"
-                  required
-                >
-                <small
-                  id="{{form.first_name.id_for_label}}helptext"
-                  class="form-text text-muted"
-                >{{form.first_name.help_text|safe}}</small>
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="{{form.first_name.id_for_label}}">First name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="{{form.first_name.name}}"
+                    id="{{form.first_name.id_for_label}}"
+                    value="{{form.first_name.value}}"
+                    required
+                  >
+                  <small
+                    id="{{form.first_name.id_for_label}}helptext"
+                    class="form-text text-muted"
+                  >{{form.first_name.help_text|safe}}</small>
+                </div>
+                <div class="form-group col">
+                  <label for="{{form.last_name.id_for_label}}">Last name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="{{form.last_name.name}}"
+                    id="{{form.last_name.id_for_label}}"
+                    value="{{form.last_name.value}}"
+                  >
+                  <small
+                    id="{{form.last_name.id_for_label}}helptext"
+                    class="form-text text-muted"
+                  >{{form.last_name.help_text|safe}}</small>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="{{form.last_name.id_for_label}}">Last name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="{{form.last_name.name}}"
-                  id="{{form.last_name.id_for_label}}"
-                >
-                <small
-                  id="{{form.last_name.id_for_label}}helptext"
-                  class="form-text text-muted"
-                >{{form.last_name.help_text|safe}}</small>
-              </div>
-              <div class="form-group">
-                <label for="{{form.age.id_for_label}}">Age</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  name="{{form.age.name}}"
-                  id="{{form.age.id_for_label}}"
-                  required
-                >
-                <small
-                  id="{{form.age.id_for_label}}helptext"
-                  class="form-text text-muted"
-                >{{form.age.help_text|safe}}</small>
-              </div>
-              <div class="form-group">
-                <label for="{{form.gender.id_for_label}}">Gender</label>
-                <select class="form-control" name="{{form.gender.name}}" id="{{form.gender.id_for_label}}">
-                  {% for key, val in form.fields.gender.choices %}
-                  <option value={{key}} required>{{val}}</option>
-                  {% endfor %}
-                </select>
+              <div class="form-row">
+                <div class="form-group col-sm-3">
+                  <label for="{{form.gender.id_for_label}}">Gender</label>
+                  <select class="form-control" name="{{form.gender.name}}" id="{{form.gender.id_for_label}}">
+                    {% for key, val in form.fields.gender.choices %}
+                    <option value={{key}} {% if key == form.gender.value %}selected{% endif %} required>{{val}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="form-group col-sm-3">
+                  <label for="{{form.age.id_for_label}}">Age</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    name="{{form.age.name}}"
+                    id="{{form.age.id_for_label}}"
+                    value="{{form.age.value}}"
+                    required
+                  >
+                  <small
+                    id="{{form.age.id_for_label}}helptext"
+                    class="form-text text-muted"
+                  >{{form.age.help_text|safe}}</small>
+                </div>
               </div>
             </div>
           </fieldset>
@@ -132,6 +140,7 @@
                     class="form-control"
                     name="{{form.workplace.name}}"
                     id="{{form.workplace.id_for_label}}"
+                    value="{{form.workplace.value}}"
                     required
                   >
                   <small
@@ -143,7 +152,7 @@
                   <label for="{{form.province.id_for_label}}">Province</label>
                   <select class="form-control" name="{{form.province.name}}" id="{{form.province.id_for_label}}" required>
                     {% for key, val in form.fields.province.choices %}
-                    <option value={{key}} required>{{val}}</option>
+                    <option value={{key}} {% if key == form.province.value %}selected{% endif %} required>{{val}}</option>
                     {% endfor %}
                   </select>
                 </div>
@@ -151,7 +160,7 @@
                   <label for="{{form.regency.id_for_label}}">Regency</label>
                   <select class="form-control" name="{{form.regency.name}}" id="{{form.regency.id_for_label}}" required>
                     {% for key, val in form.fields.regency.choices %}
-                    <option value={{key}}>{{val}}</option>
+                    <option value={{key}} {% if key == form.regency.value %}selected{% endif %} required>{{val}}</option>
                     {% endfor %}
                   </select>
                 </div>
@@ -163,6 +172,7 @@
                   class="form-control"
                   name="{{form.position.name}}"
                   id="{{form.position.id_for_label}}"
+                  value="{{form.position.value}}"
                   required
                 >
                 <small
@@ -177,6 +187,7 @@
                   class="form-control"
                   name="{{form.year_of_service.name}}"
                   id="{{form.year_of_service.id_for_label}}"
+                  value="{{form.year_of_service.value}}"
                   required
                 >
                 <small
@@ -191,6 +202,7 @@
                   class="form-control"
                   name="{{form.last_education.name}}"
                   id="{{form.last_education.id_for_label}}"
+                  value="{{form.last_education_value.value}}"
                   required
                 >
                 <small

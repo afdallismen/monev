@@ -21,6 +21,11 @@ urlpatterns = [
         name="questionnaire_responses",
     ),
     path(
+        'questionnaires/<int:pk>/responses/chart',
+        views.questionnaire_responses_chart,
+        name="questionnaire_responses_chart",
+    ),
+    path(
         'questionnaires/<int:pk>/submit',
         views.questionnaire_submit,
         name="questionnaire_submit",

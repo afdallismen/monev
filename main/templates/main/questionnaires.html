@@ -6,29 +6,79 @@
   <form class="form-inline mb-5" method="get" action="{% url 'main:questionnaire_list' %}">
     <div class="form-group mr-2">
       <select class="form-control" name="diklat" {% if not diklats %}disabled{% endif %}>
-        <option>{% if diklats %}Choose a diklat...{% else %}No available diklat yet.{% endif %}</option>
+        <option value="">{% if diklats %}Choose a diklat...{% else %}No available diklat yet.{% endif %}</option>
         {% for diklat in diklats %}
-        <option value="{{ diklat.id }}">{{ diklat.title|truncatechars:100 }}</option>
+        <option value="{{ diklat.id }}" {% if diklat.id == selected %}selected{% endif %}>{{ diklat.title|truncatechars:100 }}</option>
         {% endfor %}
       </select>
     </div>
     <button type="submit" class="btn btn-success" {% if not diklats %}disabled{% endif %}>Go</button>
   </form>
-  <p class="font-weight-bold text-muted">Available questionnaires :</p>
-  {% for questionnaire in questionnaires %}
-  <div class="row px-2 pt-2">
-    <div class="col">
-      <a href="#">{{ questionnaire.title|truncatechars:100 }}</a>
+  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    {% if questionnaires.submitted %}
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="pill" href="#all-questionnaire" role="tab" selected>All</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="pill" href="#unsubmitted-questionnaire" role="tab">Unsubmitted</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="pill" href="#submitted-questionnaire" role="tab">Submitted</a>
+    </li>
+    {% endif %}
+  </ul>
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="all-questionnaire" role="tabpanel">
+      {% for questionnaire in questionnaires.all %}
+        <div class="row px-2 pt-2">
+          <div class="col">
+            <a href="{% url 'main:questionnaire_detail' pk=questionnaire.pk%}">{{ questionnaire.title }}</a>
+          </div>
+          <div class="col-sm-auto">
+            <span class="text-right text-muted">{{ questionnaire.get_instrument_display }}</span>
+          </div>
+          <div class="col-sm-auto">
+            <span class="text-right text-muted">{{ questionnaire.diklat.date }}</span>
+          </div>
+        </div>
+        <hr class="my-0"/>
+      {% empty %}
+        <p class="px-2 text-warning">No available questionnaire yet.</p>
+      {% endfor %}
     </div>
-    <div class="col-sm-auto">
-      <span class="text-right text-muted">{{ questionnaire.get_instrument_display }}</span>
+    <div class="tab-pane fade" id="unsubmitted-questionnaire" role="tabpanel">
+      {% for questionnaire in questionnaires.unsubmitted %}
+        <div class="row px-2 pt-2">
+          <div class="col">
+            <a href="{% url 'main:questionnaire_detail' pk=questionnaire.pk%}">{{ questionnaire.title }}</a>
+          </div>
+          <div class="col-sm-auto">
+            <span class="text-right text-muted">{{ questionnaire.get_instrument_display }}</span>
+          </div>
+          <div class="col-sm-auto">
+            <span class="text-right text-muted">{{ questionnaire.diklat.date }}</span>
+          </div>
+        </div>
+        <hr class="my-0"/>
+      {% empty %}
+        <p class="px-2 text-warning">All available questionnaire has been submitted.</p>
+      {% endfor %}
     </div>
-    <div class="col-sm-auto">
-      <span class="text-right text-muted">{{ questionnaire.diklat.date }}</span>
+    <div class="tab-pane fade" id="submitted-questionnaire" role="tabpanel">
+      {% for questionnaire in questionnaires.submitted %}
+        <div class="row px-2 pt-2">
+          <div class="col">
+            <a href="{% url 'main:questionnaire_detail' pk=questionnaire.pk%}">{{ questionnaire.title }}</a>
+          </div>
+          <div class="col-sm-auto">
+            <span class="text-right text-muted">{{ questionnaire.get_instrument_display }}</span>
+          </div>
+          <div class="col-sm-auto">
+            <span class="text-right text-muted">{{ questionnaire.diklat.date }}</span>
+          </div>
+        </div>
+        <hr class="my-0"/>
+      {% endfor %}
     </div>
   </div>
-  <hr class="my-0"/>
-  {% empty %}
-    <p class="text-warning">No available questionnaire yet.</p>
-  {% endfor %}
 {% endblock %}

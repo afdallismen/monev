@@ -19,9 +19,9 @@ class MainAdminSite(AdminSite):
 
 class DiklatAdmin(admin.ModelAdmin):
     autocomplete_fields = ['province', 'regencies']
-    search_fields = ['title']
-    list_display = ('__str__', 'date', 'duration_display', 'supervisor',
-                    'location')
+    search_fields = ['title', 'province__name', 'regencies__name']
+    list_display = ('__str__', 'date', 'duration_display', 'province',
+                    'regencies_display', 'participants')
     list_filter = [
         ('province', admin.RelatedOnlyFieldListFilter),
         ('regencies', admin.RelatedOnlyFieldListFilter),
@@ -32,6 +32,19 @@ class DiklatAdmin(admin.ModelAdmin):
         return _("{!s} days").format(obj.duration)
     duration_display.short_description = _("duration")
     duration_display.admin_order_field = 'duration'
+
+    def regencies_display(self, obj):
+        return ", ".join(obj.regencies.values_list('name', flat=True))
+    regencies_display.short_description = _("regencies")
+
+    def participants(self, obj):
+        regencies = obj.regencies.values_list('name', flat=True)
+        q = ",".join(regencies)
+        url = reverse('admin:account_respondent_changelist')
+        return format_html(
+            '<a href="{}">Participants</a>',
+            url + "?q={!s}".format(q),
+        )
 
     def has_add_permission(self, request):
         return request.user.is_superuser
@@ -69,7 +82,8 @@ class TopicInline(nested_admin.NestedStackedInline):
 class QuestionnaireAdmin(nested_admin.NestedModelAdmin):
     inlines = [TopicInline]
     search_fields = ['diklat__title']
-    list_display = ('__str__', 'instrument', 'diklat', 'responses')
+    list_display = ('__str__', 'instrument', 'diklat', 'respondents',
+                    'responses', 'chart')
     list_filter = ['diklat']
     date_hierarchy = 'diklat__date'
 
@@ -77,10 +91,26 @@ class QuestionnaireAdmin(nested_admin.NestedModelAdmin):
         return (request.user.is_superuser or
                 obj.diklat.province == request.user.regionaladmin.region)
 
+    def respondents(self, obj):
+        regencies = obj.diklat.regencies.values_list('name', flat=True)
+        q = ",".join(regencies)
+        url = reverse('admin:account_respondent_changelist')
+        return format_html(
+            '<a href="{}">Respondents</a>',
+            url + "?q={!s}".format(q),
+        )
+
     def responses(self, obj):
         return format_html(
-            "<a href='{}' target='blank'><b>Result</b></a>",
+            "<a href='{}' target='blank'>Responses</a>",
             reverse('main:questionnaire_responses', kwargs={'pk': obj.pk})
+        )
+
+    def chart(self, obj):
+        return format_html(
+            "<a href='{}' target='blank'>Chart</a>",
+            reverse(
+                'main:questionnaire_responses_chart', kwargs={'pk': obj.pk})
         )
 
 

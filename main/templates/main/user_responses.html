@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+  <style>
+    .shrink {
+      white-space: nowrap;
+    }
+    .expand {
+      width: 99%;
+    }
+    .wrapper {
+      padding: 100px;
+    }
+  </style>
+  <style type="text/css" media="print">
+    @page {
+      size: landscape;
+      margin: 0mm;
+    }
+    @media print {
+      .page-break {page-break-before: always;}
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  {% for topic in data %}
+    <div class="wrapper">
+      <p class="text-center">Data {{topic.title}}</p>
+      {% for question in topic.questions %}
+      <div class="px-3">
+        <table class="table table-sm table-bordered text-center mb-1">
+          <thead class="font-weight-normal">
+            <tr>
+              <th rowspan="2" class="expand font-weight-normal">
+                KATEGORI
+              </th>
+              {% for regency in question.regencies %}
+              <th colspan="{{question.options|length}}" class="shrink font-weight-normal">
+                {{regency|title}}
+              </th>
+              {% endfor %}
+            </tr>
+            {% for regency in question.regencies %}
+            <tr>
+              {% for option in question.options %}
+              <th class="font-weight-normal shrink">
+                {{option.1|upper}}
+              </th>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </thead>
+          <tbody>
+            {% for result in question.results %}
+            <tr>
+              <td class="text-left pl-2">
+                {{result.measure|capfirst}}
+              </td>
+              {% for count in result.counts %}
+              <td>
+                {{count}}
+              </td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <p class="mt-0">Catatan; {% for option in question.options %}{{option.1|upper}}: {{option.0|title}}{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="page-break"></div>
+  {% endfor %}
+{% endblock %}
